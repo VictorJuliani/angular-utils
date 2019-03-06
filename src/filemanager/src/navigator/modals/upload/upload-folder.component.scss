@@ -1,0 +1,30 @@
+.overflow {
+	max-height: 300px;
+	overflow-y: auto;
+}
+
+td {
+	white-space: nowrap;
+}
+
+.footer {
+	margin-right: auto;
+}
+
+.previewIcon {
+  width: 100px;
+  height: 100px;
+  background-size: cover;
+  background-repeat: no-repeat;
+}
+
+.progress {
+	background-color: #ccc;
+	height: 8px;
+	margin-top: 2px;
+}
+
+.failures {
+	max-height: 400px;
+	overflow-y: auto;
+}

@@ -1,0 +1,9 @@
+<div class="sidebar pt-3">
+    <ul>
+        <ng-container *ngIf="currentPath$ | async as currentPath">
+            <li *ngFor="let file of history$ | async" [class.active]="isActive(currentPath, file)">
+                <vb-sidebar-item [file]="file" [basePath]="basePath" [currentPath]="currentPath"></vb-sidebar-item>
+            </li>
+        </ng-container>
+    </ul>
+</div>

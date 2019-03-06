@@ -1,0 +1,15 @@
+{
+  "name": "@vonbraunlabs/alert",
+  "version": "2.0.0",
+  "peerDependencies": {
+    "@angular/core": "^7.0.0",
+    "@ngx-translate/core": "^11.0.0"
+  },
+  "dependencies": {
+    "sweetalert2": "^7.32.1",
+    "toastr": "^2.1.4"
+  },
+  "devDependencies": {
+    "@types/toastr": "^2.1.35"
+  }
+}

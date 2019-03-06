@@ -1,0 +1,38 @@
+<div class="navbar-collapse">
+	<div class="navbar-form navbar-right text-sm-right">
+		<div class="animated fast fadeIn">
+			<input *ngIf="showSearch"
+				class="form-control form-control-sm" placeholder="{{ 'Search' | translate }}..."
+				[(ngModel)]="query" (keyup.enter)="doSearch()">
+
+			<div class="btn-group">
+				<ng-container [ngSwitch]="mode">
+					<button *ngSwitchCase="'table'" class="btn btn-flat btn-sm" (click)="setTemplate('icons')" title="{{ 'Icons View' | translate }}">
+						<fa-icon [icon]="[ 'fas', 'th-large' ]"></fa-icon>
+					</button>
+					<button *ngSwitchCase="'icons'" class="btn btn-flat btn-sm" (click)="setTemplate('table')" title="{{ 'List View' | translate }}">
+						<fa-icon [icon]="[ 'fas', 'th-list' ]"></fa-icon>
+					</button>
+				</ng-container>
+
+				<!-- <button class="btn btn-flat btn-sm" type="button" id="more" data-toggle="dropdown" aria-expanded="true">
+					<fa-icon [icon]="[ 'fas', 'ellipsis-v' ]"></fa-icon>
+				</button> -->
+
+				<!-- TODO: update this -->
+				<!-- <ul class="dropdown-menu scrollable-menu animated fast fadeIn float-right" role="menu" aria-labelledby="more">
+					<li role="presentation" *ngIf="config.allowedActions.createFolder" (click)="modal('newfolder') && prepareNewFolder()">
+						<a role="menuitem" tabindex="-1">
+							<i class="glyphicon glyphicon-plus"></i> {{ 'New folder' | translate }}
+						</a>
+					</li>
+					<li role="presentation" *ngIf="config.allowedActions.upload" (click)="modal('uploadfile')">
+						<a role="menuitem" tabindex="-1">
+							<i class="glyphicon glyphicon-cloud-upload"></i> {{ 'Upload files' | translate }}
+						</a>
+					</li>
+				</ul> -->
+			</div>
+		</div>
+	</div>
+</div>

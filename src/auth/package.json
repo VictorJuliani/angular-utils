@@ -1,0 +1,16 @@
+{
+  "name": "@vonbraunlabs/auth",
+  "version": "2.0.0",
+  "peerDependencies": {
+    "@angular/common": "^7.0.0",
+    "@angular/core": "^7.0.0",
+    "@angular/router": "^7.0.0",
+    "@vonbraunlabs/common": "~2.0.0"
+  },
+  "devDependencies": {
+    "@vonbraunlabs/app-state": "^2.0.0"
+  },
+  "dependencies": {
+    "ngx-cookie-service": "^2.1.0"
+  }
+}

@@ -1,0 +1,22 @@
+.file-drop-zone { 
+	border: dotted 3px rgb(154, 177, 255); 
+	border-radius: 30px;
+	background-color: rgba(204, 203, 203, 0.5);
+	height: 100px;
+	margin: 10px;
+	font-size: 24px;
+    font-weight: 700;
+    color: white;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Default class applied to drop zones on over */
+.invalid-drag {
+	border: dotted 3px red;
+}
+
+.valid-drag {
+	border: dotted 3px green;
+}

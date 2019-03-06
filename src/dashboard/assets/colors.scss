@@ -1,0 +1,12 @@
+$side-color-1: #402d5c;
+$side-color-2: lighten($side-color-1, 5%);
+$side-color-3: lighten($side-color-2, 5%);
+$side-color-4: lighten($side-color-3, 5%);
+$side-color-5: lighten($side-color-4, 5%);
+$side-color-6: lighten($side-color-5, 5%);
+$side-color-7: lighten($side-color-6, 5%);
+$side-color-8: lighten($side-color-7, 5%);
+$side-color-9: lighten($side-color-8, 5%);
+$side-colors: $side-color-1 $side-color-2 $side-color-3 $side-color-4 $side-color-5 $side-color-6 $side-color-7 $side-color-8 $side-color-9;
+
+$highlight: #222;

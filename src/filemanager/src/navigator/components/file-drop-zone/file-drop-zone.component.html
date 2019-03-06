@@ -1,0 +1,11 @@
+<div
+	id="drop-area"
+	class="file-drop-zone"
+	(dragenter)="dragenter($event)"
+	(dragover)="dragover($event)"
+	(dragleave)="dragleave($event)"
+	(drop)="onDrop($event)"
+	ng-mouseleave="dragleave($event)"
+>
+	{{ 'Drop files and folders here' | translate }}
+</div>

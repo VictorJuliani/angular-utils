@@ -1,0 +1,43 @@
+<vb-modal title="Change Permissions" (submit)="permissions()">
+	<div class="row">
+		<div class="col">
+			<h2>{{ 'Assigned roles' | translate }}</h2>
+			<div class="role-list"
+				cdkDropList
+				#allowedList="cdkDropList"
+				[cdkDropListData]="newRoles"
+				[cdkDropListConnectedTo]="[notAllowedList]"
+				(cdkDropListDropped)="moveRole($event)">
+				<div class="role-item" *ngFor="let role of newRoles" cdkDrag>
+					<div class="role-placeholder" *cdkDragPlaceholder></div>
+					{{ role }}
+				</div>
+			</div>
+		</div>
+		<div class="col">
+			<h2>{{ 'Available roles' | translate }}</h2>
+			<div class="role-list"
+				cdkDropList
+				#notAllowedList="cdkDropList"
+				[cdkDropListData]="unauthorizedRoles"
+				[cdkDropListConnectedTo]="[allowedList]"
+				(cdkDropListDropped)="moveRole($event)">
+				<div class="role-item" *ngFor="let role of unauthorizedRoles" cdkDrag>
+					<div class="role-placeholder" *cdkDragPlaceholder></div>
+					{{ role }}
+				</div>
+			</div>
+		</div>
+	</div>
+	<hr/>
+	<h2>{{ 'Inherited roles' | translate }}</h2>
+	<div class="role-list">
+		<div class="role-item default-cursor" *ngFor="let role of parentRoles">
+			{{ role }}
+		</div>
+	</div>
+
+	<div class="checkbox mt-2" *ngIf="allowRecursive">
+		<input type="checkbox" [(ngModel)]="recursive">{{ 'Recursive' | translate }}
+	</div>
+</vb-modal>

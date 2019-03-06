@@ -1,0 +1,21 @@
+<vb-list-container class="table-responsive"
+	[loader]="sortLoader"
+	[template]="table"
+	[pageSize]="pageSize"
+	[canUpdateSize]="canUpdateSize"
+	[loadingSpinner]="!!loadingMessage"
+	[loadingMessage]="loadingMessage">
+	<ng-template #table let-page>
+		<table class="table table-striped table-hover text-center" [class.table-sm]="small" [class.table-bordered]="bordered">
+			<thead class="no-border">
+				<tr>
+					<th *ngFor="let h of headers" class="no-select" (click)="sortHeader(h)" [class.pointer]="h.sortable">
+						{{ h.label | translate }}
+						<fa-icon [class.invisible]="!sort || sort.key !== h.id" [icon]="sortIcon"></fa-icon>
+					</th>
+				</tr>
+			</thead>
+			<ng-container *ngTemplateOutlet="body; context: { $implicit: page }"></ng-container>
+		</table>
+	</ng-template>
+</vb-list-container>

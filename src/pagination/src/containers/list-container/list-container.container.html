@@ -1,0 +1,10 @@
+<ng-container *ngTemplateOutlet="template; context: { $implicit: pageItems }"></ng-container>
+	
+<vb-no-items *ngIf="loading || (notFoundMessage && !hasItems)"
+	[isolate]="notFoundIsolated" [loading]="loading" [message]="loading ? loadingMessage : notFoundMessage">
+</vb-no-items>
+	
+<vb-pagination [hidden]="!showPagination"
+	[loader]="loader" [pageSize]="pageSize" [canUpdateSize]="canUpdateSize"
+	(pageLoading)="onPageLoading($event)" (pageChanged)="onPageChanged($event)">
+</vb-pagination>

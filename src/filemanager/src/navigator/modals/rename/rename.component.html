@@ -1,0 +1,4 @@
+<vb-modal title="Rename" [disabled]="!canRename" (submit)="rename()">
+	<label class="radio">{{ 'Enter new name for' | translate }} <b>{{ item.name }}</b></label>
+	<input class="form-control" [(ngModel)]="newName" (ngModelChange)="onModelChange()" ngbAutofocus>
+</vb-modal>

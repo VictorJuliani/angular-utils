@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/auth",
+  "whitelistedNonPeerDependencies": [
+    "@vonbraunlabs/common",
+    "ngx-cookie-service"
+  ],
+  "lib": {
+    "entryFile": "./public_api.ts",
+    "umdModuleIds": {
+      "@vonbraunlabs/app-state": "vonbraunlabs-app-state",
+      "@vonbraunlabs/common": "vonbraunlabs-common",
+      "ngx-cookie-service": "ngxCookieService"
+    }
+  }
+}

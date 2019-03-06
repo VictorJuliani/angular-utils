@@ -1,0 +1,55 @@
+:host {
+	display: flex;
+	flex-direction: column;
+}
+
+.navigator {
+	flex: 1 1 auto;
+	padding: 15px;
+	color: #fff;
+
+	&.bg-white {
+		color: #000;
+	}
+}
+
+vb-file[class*='col-']:first-child {
+	padding-left:0;
+}
+
+vb-file[class*='col-']:last-child {
+	padding-right:0;
+}
+
+.fileTable {
+	max-height: 75vh;
+	overflow-y: auto;
+
+	.table {
+		line-height: 0.4;
+		font-weight: normal;
+		font-size: 1rem;
+	}
+
+	td {
+		padding: 0;
+	}
+
+	thead, th {
+		position: sticky;
+		top: 0;
+		z-index: 999;
+		background-color: white;
+		color: #444;
+		border: none;
+	}
+}
+
+.no-select {
+	-webkit-touch-callout: none; /* iOS Safari */
+	-webkit-user-select: none;   /* Chrome/Safari/Opera */
+	-khtml-user-select: none;    /* Konqueror */
+	-moz-user-select: none;      /* Firefox */
+	-ms-user-select: none;       /* IE/Edge */
+	user-select: none;           /* non-prefixed version, currently */
+}

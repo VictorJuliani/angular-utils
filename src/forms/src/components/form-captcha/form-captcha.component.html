@@ -1,0 +1,20 @@
+<div class="captcha">
+	<div class="wrapper text-right">
+		<span *ngIf="captcha$ | async as captcha; else loading">
+			<img class="img-thumbnail captcha" src="{{ 'data:image/png;base64,' + captcha.img }}" alt="CAPTCHA" />
+		</span>
+		<ng-template #loading>
+			<span class="card text-center">{{ ('Loading captcha' | translate) }}...</span>
+		</ng-template>
+		<a class="btn" (click)="reload()">
+			<fa-icon [icon]="[ 'fas', 'sync-alt' ]"></fa-icon>
+		</a>
+	</div>
+
+	<div class="formGroup row">
+		<label class="col-sm-3 form-control-label">{{ label | translate }}</label>
+		<div class="col-sm-9" [formGroup]="group">
+			<input type="text" [name]="name" [formControlName]="name" class="form-control" />
+		</div>
+	</div>
+</div>

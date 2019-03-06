@@ -1,0 +1,64 @@
+.item-extension::after {
+	position: absolute;
+	left: 4px;
+	bottom: 0;
+	content: attr(data-ext);
+	font-family: "Roboto","Helvetica Neue",Helvetica,Arial,sans-serif;
+	font-size: 0.1rem;
+	text-transform: uppercase;
+	color: white;
+	z-index: 998;
+}
+	
+fa-icon {
+	display: inline-block;
+	color: #7a7a7a;
+
+	&.transparent {
+		color: rgba(255, 255, 255, 0.3);
+	}
+}
+	
+img {
+	height: 3rem;
+	width: auto;
+}
+
+span {
+	word-wrap: break-word;
+}
+
+.selected {
+	fa-icon, span {
+		color: #2196F3;
+	}
+}
+
+.iconview
+{
+	font-size: 0.875rem;
+	
+	span {
+		display: block;
+		font-size: 0.75rem;
+	}
+}
+
+.tableview
+{
+	display: block;
+	padding: 0.75rem;
+
+	.item-extension::after {
+		font-size: 0.6rem;
+	}
+
+	img {
+		height: 1rem;
+		width: auto;
+	}
+
+	span {
+		margin-left: 20px;
+	}
+}

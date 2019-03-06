@@ -1,0 +1,36 @@
+:host {
+	display: flex;
+	flex: 1 1 auto;
+}
+
+.file-manager {
+	display: flex;
+	flex-flow: column;
+	flex: 1 1 auto;
+}
+
+.navigator {
+	flex: 1 1 auto;
+	overflow-y: auto;
+}
+
+.no-padding {
+	padding-top: 0;
+	padding-left: 0;
+}
+
+vb-navbar {
+	margin-bottom: 2px;
+	flex: 0 1 auto;
+}
+
+vb-sidebar {
+	display: none;
+}
+
+@media (min-width: 768px) {
+	vb-sidebar {
+		display: block;
+		height: 100%;
+	}
+}

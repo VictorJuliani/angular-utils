@@ -1,0 +1,19 @@
+<ul>
+	<li *ngFor="let item of menu" [class.header-menu]="isHeader(item)" [class.sidebar-dropdown]="isMenu(item)" [class.active]="selectedMenu === item">
+
+		<span *ngIf="isHeader(item)">{{ item.name | translate }}</span>
+		<ng-container *ngIf="isMenu(item)">
+			<!-- FIXME: replace pseudo elements on "a" & "li" with actual elements -->
+			<a class="pointer" (click)="selectMenu(item)" vb-menu-link [item]="item"></a>
+			<div class="sidebar-menu" [class.d-none]="selectedMenu !== item">
+				<ul>
+					<li *ngFor="let sub of item.subItems">
+						<a class="pointer" vb-menu-link [item]="sub"></a>
+					</li>
+				</ul>
+			</div>
+		</ng-container>
+		<a *ngIf="isLink(item)" class="pointer" vb-menu-link [item]="item"></a>
+
+	</li>
+</ul>

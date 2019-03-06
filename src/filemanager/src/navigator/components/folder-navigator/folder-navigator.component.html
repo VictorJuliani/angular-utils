@@ -1,0 +1,34 @@
+<div class="table-responsive">
+	<table class="table table-sm mb-0">
+		<thead>
+			<tr>
+				<th class="pointer" (click)="sort()">
+					{{ 'Name' | translate }}
+					<fa-icon [icon]="sortIcon"></fa-icon>
+				</th>
+				<th class="text-right">
+					<button *ngIf="currentPath.length && !loading" class="btn btn-sm btn-light" (click)="upDir()">{{ 'Go back' | translate }}</button>
+				</th>
+			</tr>
+		</thead>
+		<tbody *ngIf="!loading" class="file-item">
+			<ng-container *ngIf="fileList$ | async as fileList">
+				<tr *ngIf="!fileList.length">
+					<td colspan="2">
+						{{ 'No files found on selected folder' | translate }}...
+					</td>
+				</tr>
+				<tr *ngFor="let file of fileList">
+					<td colspan="2">
+						<a class="pointer" (click)="folderClick(file)" title="{{ file.name }}">
+							<fa-icon [icon]="[ 'fas', 'folder' ]"></fa-icon>
+							{{ file.name | strLimit:16 }}
+						</a>
+					</td>
+				</tr>
+			</ng-container>
+		</tbody>
+	</table>
+
+	<vb-spinner [loading]="loading" size="2"></vb-spinner>
+</div>

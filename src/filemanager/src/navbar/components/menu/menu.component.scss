@@ -1,0 +1,55 @@
+// FIXME: make this responsive (form input overflows it's parent container)
+
+.navbar-collapse {
+	overflow: visible;
+	padding: 0;
+}
+
+.navbar-toggle {
+	padding: 5px 10px;
+
+	.icon-bar {
+		background: #fff;
+	}
+}
+
+.navbar-form {
+	border-bottom: none;
+	border-top: none;
+	box-shadow: none;
+	padding: 0;
+	margin: 12px 0;
+
+	input[type="text"] {
+		color: #7a7a7a;
+		box-shadow: none;
+		margin: 0 10px;
+	}
+	
+	.form-control {
+		width: auto;
+		display: inline-block;
+	}
+}
+	
+.btn.btn-flat {
+	background: none;
+	color: #fff;
+	padding: 2px;
+	width: 32px;
+	height: 30px;
+	margin-left: 5px;
+
+	fa-icon {
+		font-size: 18px;
+		width: 18px;
+		height: 18px;
+		line-height: 100%;
+	}
+}
+	
+.btn-group.open > .btn-flat,
+.btn.btn-flat,
+.btn.btn-flat:active {
+	box-shadow: none;
+}

@@ -1,0 +1,15 @@
+<nav [class.bg-transparent]="transparent">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col">
+                <span *ngIf="!showBreadcrumb" class="navbar-brand">{{ 'File Manager' | translate }}</span>
+                <vb-breadcrumb *ngIf="showBreadcrumb" [currentPath]="currentPath$ | async"></vb-breadcrumb>
+            </div>
+            <div class="col">
+                <vb-menu
+                    [mode]="mode$ | async" [showSearch]="showSearch"
+                    (upDir)="upDir()" (changeTemplate)="setTemplateMode($event)" (search)="onSearch($event)"></vb-menu>
+            </div>
+        </div>
+    </div>
+</nav>

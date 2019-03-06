@@ -1,0 +1,15 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/charts",
+  "whitelistedNonPeerDependencies": [
+    "@amcharts/amcharts4"
+  ],
+  "lib": {
+    "entryFile": "./public_api.ts",
+    "umdModuleIds": {
+      "@amcharts/amcharts4/themes/animated": "am4themes_animated",
+      "@amcharts/amcharts4/core": "am4core",
+      "@amcharts/amcharts4/charts": "am4charts"
+    }
+  }
+}

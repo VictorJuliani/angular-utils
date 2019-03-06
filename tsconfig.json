@@ -1,0 +1,42 @@
+{
+  "compileOnSave": false,
+  "compilerOptions": {
+    "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
+    "sourceMap": true,
+    "declaration": false,
+    "moduleResolution": "node",
+    "emitDecoratorMetadata": true,
+    "experimentalDecorators": true,
+    "target": "es5",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2017",
+      "dom"
+    ],
+    "paths": {
+      "@lib": [ "tests/index.ts" ],
+      "@testing": [ "testing/index.ts" ],
+
+      "@alert/*": [ "src/alert/src/*" ],
+      "@app-state/*": [ "src/app-state/src/*" ],
+      "@auth/*": [ "src/auth/src/*" ],
+      "@common/*": [ "src/common/src/*" ],
+      "@dashboard/*": [ "src/dashboard/src/*" ],
+      "@forms/*": [ "src/forms/src/*" ],
+      "@pagination/*": [ "src/pagination/src/*" ],
+      "@translate/*": [ "src/translate/src/*" ],
+
+      "@vonbraunlabs/alert": [ "dist/alert" ],
+      "@vonbraunlabs/app-state": [ "dist/app-state" ],
+      "@vonbraunlabs/auth": [ "dist/auth" ],
+      "@vonbraunlabs/common": [ "dist/common" ],
+      "@vonbraunlabs/dashboard": [ "dist/dashboard" ],
+      "@vonbraunlabs/forms": [ "dist/forms" ],
+      "@vonbraunlabs/pagination": [ "dist/pagination" ],
+      "@vonbraunlabs/translate": [ "dist/translate" ]
+    }
+  }
+}

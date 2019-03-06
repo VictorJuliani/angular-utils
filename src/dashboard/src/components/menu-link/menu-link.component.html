@@ -1,0 +1,3 @@
+<fa-icon *ngIf="item.icon" [icon]="item.icon"></fa-icon>
+<span>{{ item.label | translate }}</span>
+<span *ngIf="item.badge" class="badge badge-pill" [ngClass]="item.badge.class">{{ item.badge.text }}</span>

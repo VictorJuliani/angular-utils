@@ -1,0 +1,42 @@
+// TODO: use vars for colors
+
+.sidebar {
+	background: #fafafa;
+	padding: 0;
+	overflow-x: hidden;
+	overflow-y: auto;
+	border-right: 1px solid #eee;
+	height: 100%;
+}
+
+ul {
+	margin: 0;
+	padding: 0;
+	padding-left: 12px;
+	list-style: none;
+	
+	&:first-child {
+		padding-left: 0;
+	}
+	
+	> li {
+		border-left: none;
+		padding-left: 0px;
+
+		> :host > a {
+			color: #7a7a7a;
+			padding: 0px 16px;
+			cursor: pointer;
+	
+			&:hover, 
+			&:focus {
+				background: none;
+				color: #1378b9;
+			}
+		}
+
+		&.active > :host > a {
+			color: #2196F3;
+		}
+	}
+}

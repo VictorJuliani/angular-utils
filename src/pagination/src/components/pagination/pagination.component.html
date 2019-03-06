@@ -1,0 +1,26 @@
+<div class="row mx-0">
+	<div *ngIf="canUpdateSize" class="visible-md col-md-3 my-auto">
+		<span>{{ 'Page Info' | translate:paginationInfo }}</span>
+	</div>
+	<div class="col text-center">
+		<ngb-pagination
+			class="d-inline-block"
+			[boundaryLinks]="true" [directionLinks]="true"
+			[collectionSize]="totalItems" [pageSize]="pageSize"
+			[(page)]="page" (pageChange)="changePage($event)"
+			[maxSize]="7" [ellipses]="false" [rotate]="true"
+			previousText="&lsaquo;"
+			nextText="&rsaquo;"
+			firstText="&laquo;"
+			lastText="&raquo;">
+		</ngb-pagination>
+	</div>
+	<div *ngIf="canUpdateSize" class="col-md-3 my-auto">
+		<div class="float-right">
+			<span class="mr-2 my-auto">{{ 'Page size' | translate }}:</span>
+			<input class="form-control form-control-sm" type="number"
+				[(ngModel)]="pageSize"
+				(ngModelChange)="changeSize()">
+		</div>
+	</div>
+</div>

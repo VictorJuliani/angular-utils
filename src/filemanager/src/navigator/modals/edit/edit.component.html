@@ -1,0 +1,4 @@
+<vb-modal title="Edit" [disabled]="!canEdit" (submit)="edit()">
+	<label class="radio bold">{{ item | fullPath }}</label>
+	<textarea class="form-control" [(ngModel)]="newContent" ngbAutofocus></textarea>
+</vb-modal>

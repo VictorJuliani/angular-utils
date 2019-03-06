@@ -1,0 +1,18 @@
+<div class="file-manager">
+	
+	<vb-navbar></vb-navbar>
+	<div class="row navigator">
+		<vb-sidebar *ngIf="hasSidebar && history$ | async"
+			class="col-md-4 col-lg-3 pr-0 animated slow fadeIn">
+		</vb-sidebar>
+
+		<vb-file-navigator
+			class="col"
+			[ngClass]="{ 'no-padding': hasSidebar && history$ | async }"
+			[refreshing]="refreshing$ | async"
+			[fileList]="fileList$ | async"
+			[currentPath]="currentPath$ | async">
+		</vb-file-navigator>
+	</div>
+
+</div>

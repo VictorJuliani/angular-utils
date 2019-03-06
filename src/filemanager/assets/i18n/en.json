@@ -1,0 +1,97 @@
+{
+	"Search": "Search",
+	"List View": "List View",
+	"Icons View": "Icons View",
+	"Name": "Name",
+	"Details": "Details",
+	"Destination": "Destination",
+	"Change": "Change",
+	"Close": "Close",
+	"Recursive": "Recursive",
+	"Type": "Type",
+	"Size": "Size",
+	"Actions": "Actions",
+	"Date": "Date",
+
+	"File Manager": "File Manager",
+	"Path Selection": "Path Selection",
+	"New folder": "New folder",
+	"Upload files": "Upload files",
+	"Drop files and folders here": "Drop files and folders here",
+	"Folder drop not supported by your browser": "Folder drop not supported by your browser",
+	"Select this": "Select this",
+	"Select files": "Select files",
+	"Go back": "Go back",
+	"Toggle fullscreen": "Toggle fullscreen",
+	"Assigned roles": "Assigned roles",
+	"Available roles": "Available roles",
+	"Inherited roles": "Inherited roles",
+	"Queue progress": "Queue progress",
+	"Cancel upload": "Cancel upload",
+	"Remove all": "Remove all",
+	"Files will be uploaded to": "Files will be uploaded to",
+
+	"No files found on selected folder": "No files found on selected folder",
+
+	"Are you sure you want to compress": "Are you sure you want to compress",
+	"Are you sure you want to delete": "Are you sure you want to delete",
+	"Enter the file name for compression": "Enter the file name for compression",
+	"Enter the file name for extraction": "Enter the file name for extraction",
+	"Enter new name for": "Enter new name for",
+	"Enter folder name": "Enter folder name",
+
+	"Open": "Open",
+	"Select": "Select",
+	"Download": "Download",
+	"Download as Zip": "Download as Zip",
+	"Preview": "Preview",
+	"Rename": "Rename",
+	"Move": "Move",
+	"Copy": "Copy",
+	"Edit": "Edit",
+	"Permissions": "Permissions",
+	"Compress": "Compress",
+	"Extract": "Extract",
+	"Remove": "Remove",
+	"Create Folder": "Create Folder",
+	"Upload": "Upload",
+
+	"File already exists": "File already exists",
+	"File name must contain only letters, numbers, spaces or the characters '-' and '.'": "File name must contain only letters, numbers, spaces or the characters '-' and '.'",
+
+	"Files successfully compressed": "Files successfully compressed",
+	"Could not compress requested files": "Could not compress requested files",
+
+	"Files successfully copied to {{path}}": "Files successfully copied to {{path}}",
+	"Could not copy files to the selected directory": "Could not copy files to the selected directory",
+
+	"Folder {{name}} created": "Folder {{name}} created",
+	"Could not create the new folder": "Could not create the new folder",
+
+	"File edit successfully saved": "File edit successfully saved",
+	"Could not save file updates": "Could not save file updates",
+
+	"Files successfully extracted": "Files successfully extracted",
+	"Could not extract requested files": "Could not extract requested files",
+
+	"Files successfully moved to {{path}}": "Files successfully moved to {{path}}",
+	"Could not move files to the selected directory": "Could not move files to the selected directory",
+
+	"Files permissions updated": "Files permissions updated",
+	"Could not update files permissions": "Could not update files permissions",
+
+	"Files successfully removed": "Files successfully removed",
+	"Could not remove files": "Could not remove files",
+
+	"Files renamed to {{name}}": "Files renamed to {{name}}",
+	"Could not rename file": "Could not rename file",
+
+	"All files have been successfully uploaded": "All files have been successfully uploaded",
+	"An error occured uploading your files. Please try uploading again.": "An error occured uploading your files. Please try uploading again.",
+	"Failed uploading file \"{{name}}\"": "Failed uploading file \"{{name}}\"",
+	"Could not upload the following files. Please review any issues and try again": "Could not upload the following files. Please review any issues and try again",
+	"View failures": "View failures",
+	"Preparing uploads": "Preparing uploads",
+	"Finishing uploads": "Finishing uploads",
+	"Uploading files": "Uploading files"
+}

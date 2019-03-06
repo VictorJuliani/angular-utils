@@ -1,0 +1,10 @@
+<context-menu>
+	<ng-template
+		*ngFor="let m of menu"
+			contextMenuItem
+			[divider]="m.divider"
+			(execute)="m.action()">
+		<fa-icon [fixedWidth]="true" [icon]="m.icon"></fa-icon>
+		<span>{{ m.title | translate }}</span>
+	</ng-template>
+</context-menu>

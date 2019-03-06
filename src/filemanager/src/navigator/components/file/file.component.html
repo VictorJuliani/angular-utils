@@ -1,0 +1,18 @@
+<a title="{{ item | fileTitle }}"
+	class="pointer"
+	(contextmenu)="click($event)"
+	(click)="click($event)"
+	(dblclick)="click($event)"
+	[ngClass]="{'selected': selected, 'tableview': tableView, 'iconview': !tableView}"
+>
+	<img *ngIf="useImg" src="{{ itemIcon }}" />
+	<fa-icon *ngIf="!useImg"
+		[icon]="itemIcon" [size]="tableView ? '1x' : '4x'"
+		class="position-relative mb-1"
+		[class.item-extension]="hasExtension"
+		[class.transparent]="transparent"
+		[attr.data-ext]="item.name | fileExtension">
+	</fa-icon>
+
+	<span>{{ item.name }}</span>
+</a>

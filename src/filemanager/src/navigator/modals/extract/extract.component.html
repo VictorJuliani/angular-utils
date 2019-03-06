@@ -1,0 +1,4 @@
+<vb-modal title="Extract" [disabled]="!canExtract" (submit)="extract()">
+	<label class="radio">{{ 'Enter the file name for extraction' | translate }} <b>{{ item.name }}</b></label>
+	<input class="form-control" [(ngModel)]="newName" ngbAutofocus>
+</vb-modal>

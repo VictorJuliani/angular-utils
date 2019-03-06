@@ -1,0 +1,4 @@
+<vb-modal title="Create Folder" [disabled]="!canCreate" (submit)="create()">
+	<label class="radio">{{ 'Enter folder name' | translate }}</label>
+	<input class="form-control" [(ngModel)]="newName"  (ngModelChange)="onModelChange()" ngbAutofocus>
+</vb-modal>

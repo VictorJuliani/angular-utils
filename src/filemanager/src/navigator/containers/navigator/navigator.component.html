@@ -1,0 +1,65 @@
+<div class="navigator"
+  [class.bg-white]="!transparent"
+  (contextmenu)="onFileClick(null, $event)"
+  (click)="onFileClick(null, $event)"
+  (dblclick)="onFileClick(null, $event)"
+>
+  <vb-error selectors="nfm"></vb-error>
+
+  <ng-template [ngIf]="(mode$ | async) == 'icons'" [ngIfElse]="fileTable">
+    <div *ngIf="!refreshing" class="row no-select">
+      <vb-file class="col-6 col-sm-3 col-md-2 mb-3 text-center"
+        *ngFor="let file of fileList"
+        [item]="file"
+        [mode]="mode$ | async"
+        [selected]="isSelected(file)"
+        [showExtension]="showExtensions"
+        [transparent]="transparent"
+        (fileClick)="onFileClick(file, $event)">
+      </vb-file>
+    </div>  
+  </ng-template>
+  <ng-template #fileTable>
+      <div *ngIf="!refreshing" class="fileTable no-select">
+          <table class="table table-hover table-striped w-100">
+              <thead>
+                  <tr>
+                    <th>{{ 'Name' | translate }}</th>
+                    <th>{{ 'Type' | translate }}</th>
+                    <th>{{ 'Size' | translate }}</th>
+                    <th>{{ 'Date' | translate }}</th>
+                  </tr>
+                </thead>
+            <tbody>
+              <tr *ngFor="let file of fileList;">
+                <td>
+                  <vb-file
+                    [item]="file"
+                    [mode]="mode$ | async"
+                    [selected]="isSelected(file)"
+                    [showExtension]="showExtensions"
+                    [transparent]="transparent"
+                    (fileClick)="onFileClick(file, $event)">
+                  </vb-file> 
+                </td>
+                <td>{{ (file.name | fileExtension) || file.type  }}</td>
+                <td>{{ file.size | fileSize }}</td>
+                <td>{{ file.date | date:'medium' }}</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>  
+  </ng-template>
+
+  <vb-no-files *ngIf="!refreshing && !fileList.length"></vb-no-files>
+  <vb-spinner class="mt-3" [loading]="refreshing" size="6"></vb-spinner>
+</div>
+
+<vb-context-menu #menu [context]="context"
+  (clear)="clearSelection()"
+  (open)="smartClick($event)"
+  (select)="pick($event)"
+  (download)="download($event, false)"
+  (downloadZip)="download($event, true)"
+  (preview)="preview($event)"
+></vb-context-menu>

@@ -1,0 +1,7 @@
+<vb-modal title="Copy" (submit)="copy()">
+	<!--<div *ngIf="isSingleItem" class="mb-3">
+		<label class="radio">{{ 'Enter new name for' | translate }} <b>{{ items[0].name }}</b></label>
+		<input class="form-control" [(ngModel)]="newName" (ngModelChange)="onModelChange()" ngbAutofocus>
+	</div> -->
+	<vb-path-selector [context]="context" (selected)="onPathSelected($event)"></vb-path-selector>
+</vb-modal>

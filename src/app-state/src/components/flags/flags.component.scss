@@ -1,0 +1,17 @@
+$highlight: rgba(81, 203, 238, 1);
+
+img {
+	width: 32px;
+	margin: 0 2px;
+	cursor: pointer;
+}
+
+img {
+	outline: none;
+	border: none;
+
+	&.selected-flag {
+		box-shadow: 0 0 5px $highlight;
+		border: 1px solid $highlight;
+	}
+  }

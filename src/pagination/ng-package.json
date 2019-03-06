@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/pagination",
+  "whitelistedNonPeerDependencies": [],
+  "lib": {
+    "entryFile": "./public_api.ts",
+    "umdModuleIds": {
+      "@ngx-translate/core": "ngx-translate-core",
+      "@ng-bootstrap/ng-bootstrap": "ngBootstrap",
+      "@fortawesome/angular-fontawesome": "angularFontawesome",
+      "@fortawesome/fontawesome-svg-core": "fontawesomeSvgCore",
+      "@fortawesome/free-solid-svg-icons": "freeSolidSvgIcons",
+      "@vonbraunlabs/common": "vonbraunlabs-common"
+    }
+  }
+}

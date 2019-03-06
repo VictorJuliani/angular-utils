@@ -1,0 +1,6 @@
+<div class="card" [class.isolate]="isolate">
+	<span class="message text-center">
+		<vb-spinner [loading]="loading"></vb-spinner>
+		<span *ngIf="!loading">{{ message | translate }}</span>
+	</span>
+</div>

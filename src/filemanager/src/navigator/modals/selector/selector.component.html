@@ -1,0 +1,8 @@
+<vb-modal title="Select Destination" (submit)="selectCurrent()">
+	<vb-breadcrumb class="breadcrumb"
+		[class.bg-transparent]="transparent"
+		[currentPath]="currentPath"
+		[navigable]="false">
+	</vb-breadcrumb>
+	<vb-folder-navigator [context]="context" [loading]="loading" (pathChanged)="onPathChanged($event)"></vb-folder-navigator>
+</vb-modal>

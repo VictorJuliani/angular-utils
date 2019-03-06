@@ -1,0 +1,15 @@
+<span *ngIf="isSingleItem">
+	<strong>{{ item.name }}</strong>
+</span>
+<span *ngIf="!isSingleItem">
+	<button class="btn badge badge-info" (click)="showDetails = !showDetails">
+		{{ showDetails ? '-' : '+' }} {{ 'Details' | translate | lowercase }}
+	</button>
+</span>
+<div *ngIf="showDetails">
+	<ul class="pl-3 mb-0">
+		<li *ngFor="let item of items">
+			<strong>{{ item.name }}</strong>
+		</li>
+	</ul>
+</div>

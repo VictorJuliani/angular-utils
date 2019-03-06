@@ -1,0 +1,23 @@
+<div class="modal-header">
+	<h4 class="modal-title">{{ title | translate }}</h4>
+	<!-- <button *ngIf="allowFullscreen" type="button" class="close fullscreen" (click)="fullscreen = !fullscreen">
+		<fa-icon [icon]="[ 'fas', 'arrows-alt' ]"></fa-icon>
+		<span class="sr-only">{{ 'Toggle fullscreen' | translate }}</span>
+	</button> -->
+	<button type="button" class="close ml-0" aria-label="Close" (click)="dismiss()">
+		<span aria-hidden="true">&times;</span>
+	</button>
+</div>
+
+<div class="modal-body">
+	<vb-error [error]="err"></vb-error>
+	<vb-spinner [loading]="loading && showSpinner"></vb-spinner>
+	<ng-content *ngIf="!loading || !showSpinner"></ng-content>
+</div>
+<div class="modal-footer">
+	<ng-content select="footer"></ng-content>
+	<button type="button" class="btn btn-light btn-sm" (click)="close(false)">{{ 'Close' | translate }}</button>
+	<button *ngIf="canSubmit" type="submit" class="btn btn-primary btn-sm" [disabled]="loading || disabled" (click)="doSubmit()">
+		{{ title | translate }}
+	</button>
+</div>

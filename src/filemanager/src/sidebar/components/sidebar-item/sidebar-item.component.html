@@ -1,0 +1,13 @@
+<a (click)="itemClick()" class="animated fast fadeInDown">
+    <span class="point">
+        <fa-icon [icon]="chevron"></fa-icon>
+    </span>
+
+    <fa-icon [icon]="folder" class="mr-2"></fa-icon>
+    {{ fileName | strLimit: 30 }}
+</a>
+<ul *ngIf="file.nodes.length">
+    <li *ngFor="let childFile of file.nodes" [class.acitve]="isActive(childFile)">
+        <vb-sidebar-item [file]="childFile" [basePath]="basePath" [currentPath]="currentPath"></vb-sidebar-item>
+    </li>
+</ul>

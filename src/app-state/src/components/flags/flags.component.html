@@ -1,0 +1,7 @@
+<span *ngFor="let flag of flags">
+	<img src="{{ flag.icon }}"
+		[alt]="flag.name"
+		[class.selected-flag]="isSelected(flag)"
+		[class.d-none]="!showSelectedFlag && isSelected(flag)"
+		(click)="onClick(flag)">
+</span>

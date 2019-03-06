@@ -1,0 +1,14 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/forms",
+  "lib": {
+    "entryFile": "./public_api.ts",
+    "umdModuleIds": {
+      "@ng-bootstrap/ng-bootstrap": "ngBootstrap",
+      "@ngx-translate/core": "ngx-translate-core",
+      "@fortawesome/angular-fontawesome": "angularFontawesome",
+      "@fortawesome/fontawesome-svg-core": "fontawesomeSvgCore",
+      "@fortawesome/free-solid-svg-icons": "freeSolidSvgIcons"
+    }
+  }
+}

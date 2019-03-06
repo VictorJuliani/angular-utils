@@ -1,0 +1,16 @@
+{
+  "$schema": "../../node_modules/ng-packagr/ng-package.schema.json",
+  "dest": "../../dist/app-state",
+  "whitelistedNonPeerDependencies": [
+    "svg-country-flags"
+  ],
+  "lib": {
+    "entryFile": "./public_api.ts",
+    "umdModuleIds": {
+      "@ngx-translate/core": "ngx-translate-core",
+      "@ngxs/store": "ngxs-store",
+      "@ng-bootstrap/ng-bootstrap": "ngBootstrap",
+      "@vonbraunlabs/translate": "translate"
+    }
+  }
+}

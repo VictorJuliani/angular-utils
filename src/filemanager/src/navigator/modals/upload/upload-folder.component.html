@@ -1,0 +1,102 @@
+<vb-modal title="Upload Files" [disabled]="!canUpload" [showSpinner]="false" [refreshOnClose]="dirty" (submit)="uploadFiles()">
+	<div *ngIf="failures && failures.length" class="alert alert-danger">
+		{{ 'Could not upload the following files. Please review any issues and try again' | translate }}:<br>
+		<button class="btn badge badge-danger" (click)="showFailures = !showFailures">
+			{{ showFailures ? '-' : '+' }} {{ 'View failures' | translate }}
+		</button>
+		<div *ngIf="showFailures">
+			<ul class="failures pl-3 mb-0">
+				<li *ngFor="let failure of failures">
+					{{ failure }}
+				</li>
+			</ul>
+		</div>
+	</div>
+
+	<label class="d-block">
+		{{ 'Files will be uploaded to' | translate }} <b>/{{ currentPath.join('/') }}</b>
+	</label>
+	<ng-container *ngIf="!loading">
+		<input type="file" accept="*" multiple (change)="drop($event)"/>
+		<!-- <input type="file" multiple webkitdirectory directory (change)="drop($event)"/> -->
+
+		<vb-file-drop-zone *ngIf="canDropFolder" (drop)="drop($event)"></vb-file-drop-zone>
+		<span *ngIf="!canDropFolder">
+			{{ 'Folder drop not supported by your browser' | translate }}
+		</span>
+	</ng-container>
+
+	<div class="alert alert-info" *ngIf="loading">
+		<ng-container [ngSwitch]="fileTree.progress">
+			<span *ngSwitchCase="0">{{ 'Preparing uploads' | translate }}...</span>
+			<span *ngSwitchCase="100">{{ 'Finishing uploads' | translate }}...</span>
+			<span *ngSwitchDefault>{{ 'Uploading files' | translate }}...</span>
+		</ng-container>
+	</div>
+
+	<div *ngIf="uploadList.length" class="table-responsive overflow">
+		<table class="table table-sm table-striped table-hover">
+			<thead>
+				<tr>
+					<th>{{ 'Name' | translate }}</th>
+					<th>{{ 'Type' | translate }}</th>
+					<th>{{ 'Size' | translate }}</th>
+					<th *ngIf="!loading">{{ 'Actions' | translate }}</th>
+				</tr>
+			</thead>
+			<tbody>
+				<tr *ngFor="let upload of uploadList; let i=index">
+					<td title="{{ upload.progress.toFixed(2) }}%">
+						<!-- <div *ngIf="['image/gif','image/png','image/jpeg'].indexOf(upload.type)>=0" class="previewIcon"></div> -->
+						<ng-container [ngSwitch]="upload.state">
+							<span *ngSwitchCase="UPLOAD_STATE.SUCCESS" class="text-success mr-1">
+								<fa-icon [icon]="[ 'fas', 'check-circle' ]"></fa-icon>
+							</span>
+							<span *ngSwitchCase="UPLOAD_STATE.ERROR" class="text-danger mr-1">
+								<fa-icon [icon]="[ 'fas', 'exclamation-triangle' ]"></fa-icon>
+							</span>
+						</ng-container>
+						<strong>{{ upload.name }}</strong>
+						<div *ngIf="loading" class="progress">
+							<div class="progress-bar progress-bar-striped progress-bar-animated"
+								role="progressbar"
+								aria-valuemin="0"
+								aria-valuemax="100"
+								[class.bg-success]="UPLOAD_STATE.SUCCESS === upload.state"
+								[class.bg-danger]="UPLOAD_STATE.ERROR === upload.state"
+								[style.width.%]="upload.progress"
+								[attr.aria-valuenow]="upload.progress"
+							></div>
+						</div>
+					</td>
+
+					<ng-container *ngIf="upload.file">
+						<td>{{ upload.file.type }}</td>
+						<td>{{ upload.file.size | fileSize }}</td>
+					</ng-container>
+					<ng-container *ngIf="!upload.file">
+						<td>{{ 'folder' | translate }}</td>
+						<td>-</td>
+					</ng-container>
+
+					<td *ngIf="!loading">
+						<button type="button" class="btn btn-danger btn-sm ml-2" (click)="deleteSingleTreeElement(upload, i)">
+							<fa-icon [icon]="[ 'fas', 'trash' ]"></fa-icon>
+						</button>
+					</td>
+				</tr>
+			</tbody>
+		</table>
+	</div>
+
+	<footer class="footer">
+		<button type="button" class="btn btn-danger btn-sm" (click)="deleteFiles()" *ngIf="uploadList.length">
+			<span *ngIf="!loading">
+				<fa-icon [icon]="[ 'fas', 'trash' ]"></fa-icon> {{ 'Remove all' | translate }}
+			</span>
+			<span *ngIf="loading">
+				<fa-icon [icon]="[ 'fas', 'ban' ]"></fa-icon> {{ 'Cancel upload' | translate }}
+			</span>
+		</button>
+	</footer>
+</vb-modal>

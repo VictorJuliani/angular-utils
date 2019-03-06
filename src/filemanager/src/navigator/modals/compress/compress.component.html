@@ -1,0 +1,7 @@
+<vb-modal title="Compress" [disabled]="!canCompress" (submit)="compress()">
+	<label class="radio">
+		{{ 'Enter the file name for compression' | translate }}
+		<vb-selected-files [items]="items"></vb-selected-files>
+	</label>
+	<input class="form-control" [(ngModel)]="newName" (ngModelChange)="onModelChange()" ngbAutofocus>
+</vb-modal>

@@ -1,0 +1,15 @@
+{	
+	"name": "@vonbraunlabs/testing",
+	"version": "1.0.2",
+	"typings": "index.d.ts",
+	"main": "index.ts",
+	"dependencies": {
+		"@vonbraunlabs/app-state": "^1.0.0",
+		"@vonbraunlabs/auth": "^1.0.0",
+		"@vonbraunlabs/common": "^1.0.0",
+		"@vonbraunlabs/crud": "^1.0.0",
+		"@vonbraunlabs/dashboard": "^1.0.0",
+		"@vonbraunlabs/forms": "^1.0.0",
+		"@vonbraunlabs/views": "^1.0.0"
+	}
+}
