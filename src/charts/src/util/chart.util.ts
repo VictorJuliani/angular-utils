@@ -80,13 +80,15 @@ export class ChartUtil {
 		return series;
 	}
 
-	public static guideLine(value: number) {
+	public static guideLine(value: number, mode: 'value' | 'category' = 'value') {
+		const type = mode;
 		return {
-			value,
+			[type]: value,
 			grid: {
 				stroke: 'red',
 				strokeOpacity: 0.5,
-				strokeDasharray: '5, 2, 2'
+				strokeDasharray: '5, 2, 2',
+				strokeWidth: 2
 			}
 		};
 	}
