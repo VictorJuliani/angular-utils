@@ -39,7 +39,8 @@ export class ErrorService
 	 */
 	public static parseError(err: HttpErrorResponse): RequestError
 	{
-		let serverError: ServerError = err.error;
+		console.error(err);
+		let serverError: ServerError = err.error || {};
 		if (typeof err.error === 'string') {
 			try {
 				serverError = JSON.parse(err.error);
