@@ -70,7 +70,7 @@ export function testCatch(
 	controller.verify();
 }
 
-export function unsort <T>(items: T[], key: keyof T): T[] {
+export function rsort <T>(items: T[], key: keyof T): T[] {
 	return [ ...items ].sort((a, b) => (b[key] as any).localeCompare(a[key]));
 }
 
