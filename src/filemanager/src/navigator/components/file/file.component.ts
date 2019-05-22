@@ -1,5 +1,4 @@
 import { Component, Input, Output, EventEmitter, ChangeDetectionStrategy, Inject } from '@angular/core';
-import { faFile, faFolder } from '@fortawesome/free-solid-svg-icons';
 // models
 import { NFMItem } from '../../../shared/models/item.model';
 import { NFMUtil } from '../../../shared/util/util';
@@ -28,8 +27,8 @@ export class FileComponent
 		return NFMUtil.isFolder(this.item) ? this.config.icons.folder : this.config.icons.file;
 	}
 
-	get tableView(){
-		return this.mode === 'table';
+	get tableView() {
+		return 'table' === this.mode;
 	}
 
 	get hasExtension() {
