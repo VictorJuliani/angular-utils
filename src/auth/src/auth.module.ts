@@ -19,11 +19,11 @@ import { AuthConfig, AUTH_CONFIG } from './models/config.interface';
 		CookieService
 	]
 })
-export class AuthModule {
+export class VbAuthModule {
 	static forRoot(config: AuthConfig): ModuleWithProviders
 	{
 		return {
-			ngModule: AuthModule,
+			ngModule: VbAuthModule,
 			providers: [
 				{ provide: AUTH_CONFIG, useValue: config },
 				{ provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true },

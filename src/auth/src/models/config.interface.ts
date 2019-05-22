@@ -8,4 +8,5 @@ export interface AuthConfig {
 	authCookie: string;
 	cookieDomain: () => string;
 	logoutOnError?: boolean;
+	authorization?: 'Bearer' | 'Basic';
 }

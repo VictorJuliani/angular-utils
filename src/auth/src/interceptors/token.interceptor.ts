@@ -1,11 +1,12 @@
 import { Injectable, Inject } from '@angular/core';
-import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest } from '@angular/common/http';
+import { HttpEvent, HttpHandler, HttpInterceptor, HttpRequest, HttpErrorResponse } from '@angular/common/http';
 import { Observable, throwError } from 'rxjs';
 import { catchError } from 'rxjs/operators';
 // models
 import { RequestError } from '@vonbraunlabs/app-state';
 import { AUTH_CONFIG, AuthConfig } from '../models/config.interface';
 import { AuthService } from '../services/auth.service';
+import { ALLOW_UNAUTHORIZED } from '../util/auth.util';
 
 @Injectable()
 export class TokenInterceptor implements HttpInterceptor
@@ -17,19 +18,25 @@ export class TokenInterceptor implements HttpInterceptor
 
 	intercept(req: HttpRequest<any>, next: HttpHandler): Observable<HttpEvent<any>>
 	{
-		if (!this.config.logoutOnError) {
-			return next.handle(req);
+		const allowUnauthorized = req.headers.has(ALLOW_UNAUTHORIZED);
+		if (allowUnauthorized) {
+			req = req.clone({ headers: req.headers.delete(ALLOW_UNAUTHORIZED) });
 		}
 
-		return next.handle(req)
-			.pipe(
-				catchError((err: RequestError) => {
-					if (err.status === 401) {
-						this.auth.logout(this.config.cookieDomain(), this.config.redirectUrl, window.location.href);
-					}
+		// if no bypass is set, logout users upon 401
+		if (this.config.logoutOnError && !allowUnauthorized) {
+			return next.handle(req)
+				.pipe(
+					catchError((err: RequestError | HttpErrorResponse) => {
+						if (401 === err.status) {
+							this.auth.logout(this.config.cookieDomain(), this.config.redirectUrl, window.location.href);
+						}
 
-					return throwError(err);
-				})
-			);
+						return throwError(err);
+					})
+				);
+		}
+
+		return next.handle(req);
 	}
 }

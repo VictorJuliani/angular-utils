@@ -3,6 +3,7 @@ import { CookieService } from 'ngx-cookie-service';
 // models
 import { redirect } from '@vonbraunlabs/common';
 import { AuthConfig, AUTH_CONFIG } from '../models/config.interface';
+import { stripProtocol } from '../util/auth.util';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService
@@ -57,7 +58,7 @@ export class AuthService
 	 */
 	public logout(domain: string, goTo?: string, next?: string): void
 	{
-		const authDomain = this.stripProtocol(domain);
+		const authDomain = stripProtocol(domain);
 		this.cookies.delete(this.config.authCookie, '/', authDomain);
 
 		if (goTo) {
@@ -67,22 +68,5 @@ export class AuthService
 
 			redirect(goTo);
 		}
-	}
-
-	/**
-	 * Remove the protocol from url.
-	 *
-	 * @example
-	 *  http://bla.com -> bla.com
-	 *  //bla.com -> bla.com
-	 *  bla.com -> bla.com
-	 *
-	 * @param url the url to strip
-	 *
-	 * @returns the url with no protocol
-	 */
-	public stripProtocol(url: string): string
-	{
-		return url.replace(/(^\w+:|^)\/\//, '');
 	}
 }
