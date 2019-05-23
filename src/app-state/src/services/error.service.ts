@@ -1,7 +1,7 @@
 import { Injectable } from '@angular/core';
 import { HttpErrorResponse } from '@angular/common/http';
-import { Observable, throwError } from 'rxjs';
-import { catchError } from 'rxjs/operators';
+import { throwError, pipe } from 'rxjs';
+import { catchError, tap } from 'rxjs/operators';
 // store
 import { Store } from '@ngxs/store';
 import * as fromStore from '../store';
@@ -13,21 +13,16 @@ export class ErrorService
 {
 	constructor(private store: Store) {}
 
-	public wrapError<T>(request: Observable<T>, selector?: string) {
-		if (selector) {
-			this.store.dispatch(new fromStore.ClearError(selector));
-		}
+	public dispatchError<T>(selector: string = 'root', clean: boolean = true) {
+		return pipe(
+			tap((any: T) => clean ? this.store.dispatch(new fromStore.ClearError(selector)) : undefined),
+			catchError(error => {
+				const parsedError = ErrorService.parseError(error);
+				this.store.dispatch(new fromStore.SetError(parsedError, selector));
 
-		return request
-			.pipe(
-				catchError(error => {
-					const parsed = ErrorService.parseError(error);
-					parsed.stored = true;
-					this.store.dispatch(new fromStore.SetError(parsed, selector));
-
-					return throwError(parsed);
-				})
-			);
+				return throwError(parsedError);
+			})
+		);
 	}
 
 	/**

@@ -18,11 +18,8 @@ export class ErrorInterceptor implements HttpInterceptor
 			.pipe(
 				catchError(error => {
 					if (error instanceof HttpErrorResponse) {
-						const parsed = ErrorService.parseError(error);
-						parsed.stored = true;
-						this.store.dispatch(new SetError(parsed));
-
-						error = parsed;
+						error = ErrorService.parseError(error);
+						this.store.dispatch(new SetError(error));
 					}
 
 					return throwError(error);
