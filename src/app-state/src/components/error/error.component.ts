@@ -5,7 +5,6 @@ import { Store } from '@ngxs/store';
 import * as fromStore from '../../store';
 // models
 import { RequestError } from '../../models/request-error.interface';
-import { RouterCleanerService } from '../../services/router.service';
 
 @Component({
 	selector: 'vb-error',
@@ -14,13 +13,13 @@ import { RouterCleanerService } from '../../services/router.service';
 })
 export class ErrorComponent implements OnInit
 {
-	@Input() selectors: string[] | 'root';
+	@Input() selectors: string | string[] | 'root';
 	@Input() error: string;
 	@Input() type = 'danger';
 
 	errors$: Observable<(RequestError | string | undefined)[]>;
 
-	constructor(private store: Store, private cleaner: RouterCleanerService) {}
+	constructor(private store: Store) {}
 
 	ngOnInit() {
 		if (this.selectors) {

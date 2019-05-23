@@ -85,15 +85,17 @@ export class ErrorState {
 	/********************** SELECTORS **********************/
 	@Selector()
 	static errors(state: StateModel) {
-		const filter = (selectors: string[] | 'root') => {
+		const filter = (selectors: string | string[] | 'root') => {
 			let selector = state.errors;
-			if ('root' === selectors) {
-				selectors = [ selectors ];
-			}
+			if (selectors) {
+				if (!Array.isArray(selectors)) {
+					selectors = [ selectors ];
+				}
 
-			if (selectors.length > 0) {
-				selector = selector
-					.filter(e => selectors.includes(e.key));
+				if (selectors.length > 0) {
+					selector = selector
+						.filter(e => selectors.includes(e.key));
+				}
 			}
 
 			return selector.map(s => s.value);
