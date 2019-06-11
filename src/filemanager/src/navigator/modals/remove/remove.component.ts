@@ -13,7 +13,7 @@ import { MiddlewareService } from '../../../shared/services/middleware.service';
 export class RemoveModalComponent
 {
 	@Input() context: NavigatorContext<NFMItem[]>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	get items() {
 		return this.context.selection;

@@ -25,7 +25,7 @@ export class SortableTableContainer
 	@Input() bordered = false;
 	@Input() loadingMessage = 'Loading...';
 
-	@ViewChild(ListContainer) list: ListContainer<any>;
+	@ViewChild(ListContainer, { static: true }) list: ListContainer<any>;
 
 	sort: Sort;
 	sortIcon: IconDefinition = faLongArrowAltUp;

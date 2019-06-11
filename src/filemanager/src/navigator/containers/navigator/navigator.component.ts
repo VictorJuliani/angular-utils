@@ -29,7 +29,7 @@ export class FileNavigatorComponent implements OnChanges
 	@Input() fileList: NFMItem[];
 	@Input() refreshing: boolean;
 	@Select(fromStore.NavigatorState.templateMode) mode$: Observable<TemplateMode>;
-	@ViewChild(FileContextMenuComponent) menu: FileContextMenuComponent;
+	@ViewChild(FileContextMenuComponent, { static: true }) menu: FileContextMenuComponent;
 
 	selectedFiles: NFMItem[];
 	context: NavigatorContext<NFMItem[]>;

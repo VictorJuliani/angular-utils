@@ -20,7 +20,7 @@ import { itemsHave } from '../../util/util';
 export class PermissionsModalComponent implements OnInit
 {
 	@Input() context: NavigatorContext<NFMItem[]>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	roles: string[];
 	newRoles: string[];

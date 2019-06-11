@@ -13,7 +13,7 @@ import { itemExists, validFilename } from '../../util/util';
 export class CreateFolderModalComponent
 {
 	@Input() context: NavigatorContext<void>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	newName: string;
 

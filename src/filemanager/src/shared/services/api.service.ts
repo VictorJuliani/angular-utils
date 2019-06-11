@@ -108,11 +108,14 @@ export class APIService
 	{
 		const headers = new HttpHeaders(
 			{
-				Accept: 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5', 
+				Accept: 'text/xml,application/xml,application/xhtml+xml,text/html;q=0.9,text/plain;q=0.8,image/png,*/*;q=0.5',
 				Authorization: ' '
-			});	
-		//return this.http.post(`https://${bucket}.s3.amazonaws.com/`, formData, { headers: headers, reportProgress: true, observe: 'events' });
-		return this.http.post(`https://s3.us-east-1.amazonaws.com/${bucket}/`, formData, { headers: headers, reportProgress: true, observe: 'events' });
+			});
+		// return this.http.post(`https://${bucket}.s3.amazonaws.com/`, formData, { headers: headers, reportProgress: true, observe: 'events' });
+		return this.http.post(`https://s3.us-east-1.amazonaws.com/${bucket}/`,
+			formData,
+			{ headers: headers, reportProgress: true, observe: 'events' }
+		);
 	}
 
 	public getContent(itemPath: string): Observable<NFMContent>

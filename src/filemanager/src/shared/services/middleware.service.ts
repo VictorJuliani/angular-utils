@@ -44,7 +44,10 @@ export class MiddlewareService
 	public list(path: string[], fromModal: boolean)
 	{
 		const selector = fromModal ? 'modal' : 'nfm';
-		return this.error.wrapError(this.api.list(this.getPath(path)), selector);
+		return this.api.list(this.getPath(path))
+			.pipe(
+				this.error.dispatchError(selector)
+			);
 	}
 
 	public hierarchy(tree: TreeHierarchy): Observable<UploadAWS>
@@ -57,13 +60,14 @@ export class MiddlewareService
 		const itemPath = this.getFilePath(item);
 		const toFilename = item.name;
 
-		return this.error.wrapError(
-			this.api.download(
+		return this.api.download(
 				itemPath,
 				toFilename,
 				this.config.downloadFilesByAjax,
 				forceNewWindow
-			), 'nfm');
+			).pipe(
+				this.error.dispatchError('nfm')
+			);
 	}
 
 	public downloadMultiple(items: NFMItem[], forceNewWindow: boolean)
@@ -114,15 +118,15 @@ export class MiddlewareService
 
 		const formData = new FormData();
 		formData.append('key', hash);
-		formData.append('acl','private');
-		formData.append('success_action_status','200');
-		formData.append('Content-Type',file.type);		
+		formData.append('acl', 'private');
+		formData.append('success_action_status', '200');
+		formData.append('Content-Type', file.type);
 		formData.append('AWSAccessKeyId', aws.accessKey);
-		formData.append('policy',aws.policy);
+		formData.append('policy', aws.policy);
 		formData.append('signature', aws.signature);
 		formData.append('file', file);
-		
-		return this.api.uploadS3(formData,aws.bucket);
+
+		return this.api.uploadS3(formData, aws.bucket);
 	}
 
 	public upload(destination: string, file: File): Observable<HttpEvent<Object>>

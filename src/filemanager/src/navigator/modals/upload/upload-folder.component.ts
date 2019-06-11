@@ -23,7 +23,7 @@ export class UploadModalComponent implements OnInit
 {
 	readonly UPLOAD_STATE = UploadState;
 	@Input() context: NavigatorContext<NFMItem[]>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	builder: FileTreeBuilder;
 	failures: string[];

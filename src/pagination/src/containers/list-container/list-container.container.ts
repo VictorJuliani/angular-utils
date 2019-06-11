@@ -23,7 +23,7 @@ export class ListContainer<T>
 	@Input() notFoundIsolated = true;
 
 	@Output() pageChanged = new EventEmitter<PageUpdate<T>>();
-	@ViewChild(PaginationComponent) pagination: PaginationComponent<T>;
+	@ViewChild(PaginationComponent, { static: true }) pagination: PaginationComponent<T>;
 
 	loading: boolean;
 

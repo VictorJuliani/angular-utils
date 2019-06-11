@@ -14,7 +14,7 @@ import { itemExists, validFilename } from '../../util/util';
 export class RenameModalComponent
 {
 	@Input() context: NavigatorContext<NFMItem>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	newName: string;
 

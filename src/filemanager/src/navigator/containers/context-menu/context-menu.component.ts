@@ -54,7 +54,7 @@ export class FileContextMenuComponent implements OnChanges
 	@Output() downloadZip = new EventEmitter<NFMItem[]>();
 	@Output() preview = new EventEmitter<NFMItem>();
 
-	@ViewChild(ContextMenuComponent) contextMenu: ContextMenuComponent;
+	@ViewChild(ContextMenuComponent, { static: true }) contextMenu: ContextMenuComponent;
 
 	readonly createMenu: MenuItem[] = [
 		{

@@ -14,7 +14,7 @@ import { NavigatorContext } from '../../models/navigator.context';
 export class CopyModalComponent
 {
 	@Input() context: NavigatorContext<NFMItem[]>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	newPath: string[];
 	newName: string;

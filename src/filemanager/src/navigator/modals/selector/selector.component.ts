@@ -12,7 +12,7 @@ import { NFMConfig, FileManagerConfig } from '../../../shared/models/config.mode
 export class SelectorModalComponent implements OnInit
 {
 	@Input() context: NavigatorContext<NFMItem[]>;
-	@ViewChild(ModalComponent) modal: ModalComponent;
+	@ViewChild(ModalComponent, { static: true }) modal: ModalComponent;
 
 	currentPath: string[];
 	loading: boolean;

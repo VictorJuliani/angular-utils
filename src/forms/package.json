@@ -1,10 +1,10 @@
 {
   "name": "@vonbraunlabs/forms",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "peerDependencies": {
-    "@angular/common": "^7.0.0",
-    "@angular/core": "^7.0.0",
-    "@angular/forms": "^7.0.0",
+    "@angular/common": "^8.0.0",
+    "@angular/core": "^8.0.0",
+    "@angular/forms": "^8.0.0",
     "@ng-bootstrap/ng-bootstrap": "^4.0.0",
     "@ngx-translate/core": "^11.0.0",
     "@fortawesome/fontawesome-svg-core": "^1.2.10",

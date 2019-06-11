@@ -38,5 +38,8 @@
       "@vonbraunlabs/pagination": [ "dist/pagination" ],
       "@vonbraunlabs/translate": [ "dist/translate" ]
     }
+  },
+  "angularCompilerOptions": {
+    "enableIvy": false
   }
 }

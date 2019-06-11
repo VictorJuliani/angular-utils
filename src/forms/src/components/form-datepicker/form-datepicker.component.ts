@@ -16,7 +16,7 @@ export class FormDatepickerComponent implements OnInit, OnChanges
 	@Input() minDate: Date;
 	@Input() maxDate: Date;
 
-	@ViewChild(NgbInputDatepicker) picker: NgbInputDatepicker;
+	@ViewChild(NgbInputDatepicker, { static: true }) picker: NgbInputDatepicker;
 
 	get control() {
 		return this.group.controls[this.name];
