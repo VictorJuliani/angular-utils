@@ -13,7 +13,7 @@ import { RequestError } from '../../models/request-error.interface';
 })
 export class ErrorComponent implements OnInit
 {
-	@Input() selectors: string | string[] | 'root';
+	@Input() selectors: string | string[] | 'root' = 'root';
 	@Input() error: string;
 	@Input() type = 'danger';
 
