@@ -1,3 +1,4 @@
 <mat-icon [class.icon-bullet]="isSubItem">{{ isSubItem ? 'radio_button_unchecked' : item.icon }}</mat-icon>
 <span class="menu-text">{{ item.label | translate }}</span>
 <span *ngIf="item.badge" class="badge badge-pill" [ngClass]="item.badge.class">{{ item.badge.text }}</span>
+<mat-icon *ngIf="hasCaret" class="icon-caret">arrow_right</mat-icon>

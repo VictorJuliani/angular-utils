@@ -13,12 +13,6 @@ import { DashboardConfig } from '../../models/config.interface';
 })
 export class DashboardContainer implements OnChanges
 {
-	/**
-	 * TODO:
-	 * - Replace font awesome with mat icons
-	 * - Add submenu caret
-	 * - Publish new version
-	 */
 	private readonly MAIN_ROLES = [ 'admin', 'user' ];
 	public readonly isSmallScreen = window.innerWidth < 768;
 	@Input() menu: Menu;

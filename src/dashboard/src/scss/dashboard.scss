@@ -107,7 +107,7 @@
             .sidebar-menu .header-menu,
             .sidebar-menu .sidebar-submenu,
             .sidebar-menu ul > li > vb-menu-link > span,
-            .sidebar-menu ul > li > vb-menu-link + mat-icon,
+            .sidebar-menu ul > li > vb-menu-link mat-icon.icon-caret,
             .sidebar-footer > div:not(.pinned-footer) {
                 display: none !important;
             }

@@ -10,15 +10,20 @@
 		<vb-menu-link
 			*ngIf="!isHeader(item)"
 			class="pointer"
-			(click)="selectItem(item)"
-			[item]="item">
+			[item]="item"
+			[hasCaret]="isMenu(item)"
+			(selected)="selectItem(item)">
 		</vb-menu-link>
-		<!-- TODO: move inside menu-link? <fa-icon class="pointer" [icon]="[ 'fas', 'caret-right' ]"></fa-icon> -->
 
 		<div *ngIf="isMenu(item)" class="sidebar-submenu" [class.invisible]="selectedItem !== item">
 			<ul>
 				<li *ngFor="let sub of item.subMenu">
-					<vb-menu-link class="pointer" [item]="sub" [isSubItem]="true"></vb-menu-link>
+					<vb-menu-link
+						class="pointer"
+						[item]="sub"
+						[isSubItem]="true"
+						(selected)="selectItem(item)">
+					</vb-menu-link>
 				</li>
 			</ul>
 		</div>

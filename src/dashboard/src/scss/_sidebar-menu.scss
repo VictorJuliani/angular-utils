@@ -62,21 +62,6 @@
     }
 
     .sidebar-dropdown {
-        > vb-menu-link + mat-icon {
-            display: inline-block;
-            font-style: normal;
-            font-variant: normal;
-            text-rendering: auto;
-            -webkit-font-smoothing: antialiased;
-            -moz-osx-font-smoothing: grayscale;
-            text-align: center;
-            background: 0 0;
-            position: absolute;
-            right: 15px;
-            top: 14px;
-            transition: transform .3s ease;
-        }
-
         .sidebar-submenu {
             opacity: 1;
             transition: opacity 1s ease;
@@ -104,7 +89,13 @@
             }
         }
 
-        &.active > vb-menu-link + mat-icon {
+
+        vb-menu-link mat-icon.icon-caret {
+            margin-right: 0;
+            // float: right;
+        }
+
+        &.active > vb-menu-link mat-icon.icon-caret {
             transform: rotate(90deg);
             right: 15px;
         }
