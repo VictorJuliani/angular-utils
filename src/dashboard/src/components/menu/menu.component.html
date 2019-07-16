@@ -3,20 +3,24 @@
 		class="position-relative"
 		[class.header-menu]="isHeader(item)"
 		[class.sidebar-dropdown]="isMenu(item)"
-		[class.active]="selectedMenu === item"
+		[class.active]="selectedItem === item"
 	>
 		<span *ngIf="isHeader(item)">{{ item.label | translate }}</span>
-		<ng-container *ngIf="isMenu(item)">
-			<vb-menu-link class="pointer" (click)="selectMenu(item)" [item]="item"></vb-menu-link>
-			<fa-icon class="pointer" [icon]="[ 'fas', 'caret-right' ]"></fa-icon>
-			<div class="sidebar-submenu" [class.invisible]="selectedMenu !== item">
-				<ul>
-					<li *ngFor="let sub of item.subMenu">
-						<vb-menu-link class="pointer" [item]="sub" [overrideIcon]="['fas', 'circle' ]" size="xs"></vb-menu-link>
-					</li>
-				</ul>
-			</div>
-		</ng-container>
-		<vb-menu-link *ngIf="isLink(item)" class="pointer" [item]="item"></vb-menu-link>
+		<!-- TODO: find a way to allow customizing background-color & box-shadow color for selectedItem (through input or smth) -->
+		<vb-menu-link
+			*ngIf="!isHeader(item)"
+			class="pointer"
+			(click)="selectItem(item)"
+			[item]="item">
+		</vb-menu-link>
+		<!-- TODO: move inside menu-link? <fa-icon class="pointer" [icon]="[ 'fas', 'caret-right' ]"></fa-icon> -->
+
+		<div *ngIf="isMenu(item)" class="sidebar-submenu" [class.invisible]="selectedItem !== item">
+			<ul>
+				<li *ngFor="let sub of item.subMenu">
+					<vb-menu-link class="pointer" [item]="sub" [overrideIcon]="['fas', 'circle' ]" size="xs"></vb-menu-link>
+				</li>
+			</ul>
+		</div>
 	</li>
 </ul>

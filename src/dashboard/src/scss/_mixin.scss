@@ -2,11 +2,11 @@
 $primary-color,
 $primary-highlight-color,
 $border-color,
-$submenu-bg-color,
-$menu-icon-bg-color,
+$menu-header-color,
 $menu-icon-color,
 $menu-icon-highlight-color,
-$menu-header-color,
+$menu-hover-bg-color,
+$menu-hover-color,
 $search-input-bg-color,
 $footer-bg-color,
 $shadow-color,
@@ -44,36 +44,10 @@ $scrollbar-color) {
             border-right: none;
         }
 
-        vb-menu-link,
-        vb-menu-link + fa-icon,
-        .sidebar-brand,
         .sidebar-header,
         .sidebar-search input,
         .sidebar-search fa-icon {
             color: $primary-color;
-        }
-
-        vb-menu-link:hover,
-        li.active > vb-menu-link {
-            color: $primary-highlight-color;
-        }
-
-        vb-menu-link:hover fa-icon,
-        li.active vb-menu-link fa-icon:not(.icon-bullet) {
-            color: $menu-icon-highlight-color;
-            // text-shadow: 0px 0px 10px rgba($menu-icon-highlight-color, .5);
-        }
-
-        ul li vb-menu-link fa-icon {
-            background-color: $menu-icon-bg-color;
-        }
-
-        .sidebar-dropdown div {
-            background-color: $submenu-bg-color;
-        }
-
-        .header-menu span {
-            color: $menu-header-color;
         }
 
         #pin-sidebar, #toggle-sidebar {
@@ -82,6 +56,31 @@ $scrollbar-color) {
             &:hover {
                 color: $primary-highlight-color;
             }
+        }
+
+        vb-menu-link {
+            fa-icon {
+                color: $menu-icon-color;
+            }
+
+            &:hover {
+                background-color: $menu-hover-bg-color;
+                color: $menu-hover-color;
+                box-shadow: none;
+            }
+        }
+
+        li.active > vb-menu-link {
+            background-color: $menu-icon-highlight-color;
+            box-shadow: 0 4px 20px 0 rgba(0,0,0,.14),0 7px 10px -5px rgba($menu-icon-highlight-color, .4);
+
+            fa-icon {
+                color: #fff;
+            }
+        }
+
+        .header-menu span {
+            color: $menu-header-color;
         }
     }
 }

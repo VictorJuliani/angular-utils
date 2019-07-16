@@ -3,7 +3,6 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 // modules
 import { TranslateModule } from '@ngx-translate/core';
-import { LoadingBarRouterModule } from '@ngx-loading-bar/router';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { faBars, faTimes, faUser, faAngleRight, faCircle } from '@fortawesome/free-solid-svg-icons';
@@ -20,7 +19,6 @@ library.add(faBars, faTimes, faUser, faAngleRight, faCircle);
 		CommonModule,
 		RouterModule,
 		TranslateModule,
-		LoadingBarRouterModule,
 		FontAwesomeModule
 	],
 	declarations: [

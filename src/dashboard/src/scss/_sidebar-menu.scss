@@ -15,8 +15,10 @@
         align-items: center;
         text-decoration: none;
         position: relative;
-        padding: 8px 30px 8px 20px;
-        width: 100%;
+        // padding: 8px 30px 8px 20px;
+        // width: 100%;
+        padding: 10px 15px;
+        margin: 10px 15px 0;
 
         &:hover > fa-icon {
             display: inline-block;
@@ -24,15 +26,20 @@
         }
 
         fa-icon {
-            margin-right: 10px;
-            font-size: 12px;
-            text-align: center;
-            flex-shrink: 0;
+            // margin-right: 10px;
+            // font-size: 12px;
+            // text-align: center;
+            // flex-shrink: 0;
 
-            &:not(.icon-bullet) {
-                width: 35px;
-                height: 35px;
-                line-height: 35px;
+            font-size: 24px;
+            // float: left;
+            margin-right: 15px;
+            line-height: 30px;
+            // width: 30px;
+            text-align: center;
+
+            &.icon-bullet {
+                font-size: 12px;
             }
         }
 
@@ -42,6 +49,13 @@
             text-overflow: ellipsis;
             flex-shrink: 1;
             overflow: hidden;
+
+            margin: 0;
+            line-height: 30px;
+            font-size: 14px;
+            position: relative;
+            display: block;
+            height: auto;
         }
 
         .badge, .label {
@@ -84,13 +98,10 @@
                 font-size: 13px;
 
                 vb-menu-link {
+                    margin: 0;
                     overflow: hidden;
                     white-space: nowrap;
                     text-overflow: ellipsis;
-
-                    .badge, .label {
-                        margin-left: auto;
-                    }
                 }
             }
         }

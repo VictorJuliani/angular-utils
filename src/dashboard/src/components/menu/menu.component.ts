@@ -1,6 +1,7 @@
-import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
 // models
 import { Menu, MenuItem } from '../../models/menu.interface';
+import { DashboardConfig } from '../../models/config.interface';
 
 @Component({
 	selector: 'vb-menu',
@@ -10,23 +11,20 @@ import { Menu, MenuItem } from '../../models/menu.interface';
 export class MenuComponent
 {
 	@Input() menu: Menu;
-	selectedMenu: MenuItem;
+	@Input() config: DashboardConfig;
+	selectedItem: MenuItem;
 
 	isHeader(item: Menu) {
-		return !this.isMenu(item) && !this.isLink(item);
+		const props = [ 'action', 'link', 'route' ];
+		return !this.isMenu(item) && !props.find(p => !!item[p]);
 	}
 
 	isMenu(item: Menu) {
 		return !!item['subMenu'];
 	}
 
-	isLink(item: Menu) {
-		const props = [ 'action', 'link', 'route' ];
-		return !this.isMenu(item) && props.find(p => !!item[p]);
-	}
-
-	selectMenu(item: MenuItem) {
-		// TODO: slideUp/slideDown animated
-		this.selectedMenu = item === this.selectedMenu ? undefined : item;
+	selectItem(item: MenuItem) {
+		// TODO: if item is a route, mark it active (or its parent, for a sub-menu)
+		this.selectedItem = item === this.selectedItem ? undefined : item;
 	}
 }

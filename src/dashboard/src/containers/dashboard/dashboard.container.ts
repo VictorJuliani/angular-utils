@@ -2,11 +2,12 @@ import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges,
 	ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { User } from '@vonbraunlabs/app-state';
 import { Menu } from '../../models/menu.interface';
+import { DashboardConfig } from '../../models/config.interface';
 
 @Component({
 	selector: 'vb-dashboard',
 	templateUrl: 'dashboard.container.html',
-	styleUrls: [ 'dashboard.container.scss', '../../scss/sidebar-themes.scss' ],
+	styleUrls: [ 'dashboard.container.scss', '../../scss/dashboard.scss', '../../scss/sidebar-themes.scss' ],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
@@ -14,18 +15,14 @@ export class DashboardContainer implements OnChanges
 {
 	/**
 	 * TODO:
-	 * - Remove this ViewEncapsulation and make classes attached to children only (ShadowDom maybe?)
 	 * - Replace font awesome with mat icons
-	 * - Improve some layout coloring
+	 * - Add submenu caret
 	 * - Publish new version
 	 */
 	private readonly MAIN_ROLES = [ 'admin', 'user' ];
 	public readonly isSmallScreen = window.innerWidth < 768;
 	@Input() menu: Menu;
-	@Input() theme: 'default' | 'chiller' | 'legacy' | 'cool' | 'ice' | 'light' = 'default';
-	@Input() showHeader: boolean;
-	@Input() showSearch: boolean;
-	@Input() brand: string;
+	@Input() config: DashboardConfig;
 	@Input() user: User;
 	@Input() status: string;
 	@Output() search = new EventEmitter<string>();

@@ -1,6 +1,6 @@
 <!-- https://github.com/azouaoui-med/pro-sidebar-template -->
 <div class="page-wrapper border-radius-on"
-	[ngClass]="theme + '-theme'"
+	[ngClass]="config.theme + '-theme'"
 	[class.toggled]="toggled"
 	[class.pinned]="pinned"
 >
@@ -14,7 +14,7 @@
 		<div class="sidebar-content">
 			<!-- sidebar-brand  -->
 			<div class="sidebar-item sidebar-brand">
-				<a>{{ brand }}</a>
+				<ng-content select="[id=brand]"></ng-content>
 				<div id="pin-sidebar" (click)="compress()">
 					<fa-icon *ngIf="!isCompressed" [icon]="[ 'fas', 'times' ]" size="1.5x"></fa-icon>
 					<fa-icon *ngIf="isCompressed" [icon]="[ 'fas', 'bars' ]" size="1.5x"></fa-icon>
@@ -22,7 +22,7 @@
 			</div>
 
 			<!-- sidebar-header  -->
-			<div *ngIf="showHeader" class="sidebar-item sidebar-header d-flex flex-nowrap">
+			<div *ngIf="config.showHeader" class="sidebar-item sidebar-header d-flex flex-nowrap">
 				<div class="user-pic">
 					<img *ngIf="activeUser.picture" class="img-responsive img-rounded" [attr.src]="activeUser.picture" alt="User picture">
 					<fa-icon *ngIf="!activeUser.picture"  class="img-responsive img-rounded" [icon]="[ 'fas', 'user' ]" size="2x"></fa-icon>
@@ -41,7 +41,7 @@
 			</div>
 
 			<!-- sidebar-search  -->
-			<div *ngIf="showSearch" class="sidebar-item sidebar-search">
+			<div *ngIf="config.showSearch" class="sidebar-item sidebar-search">
 				<div class="input-group">
 					<input type="text"
 						class="form-control search-menu"
@@ -57,7 +57,11 @@
 			</div>
 
 			<!-- sidebar-menu -->
-			<vb-menu class="sidebar-item sidebar-menu" [menu]="activeMenu"></vb-menu>
+			<vb-menu
+				class="sidebar-item sidebar-menu"
+				[config]="config"
+				[menu]="activeMenu">
+			</vb-menu>
 
 			<!-- sidebar-footer  -->
 			<!-- TODO

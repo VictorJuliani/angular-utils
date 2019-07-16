@@ -1,6 +1,6 @@
-import { Component, Input, ChangeDetectionStrategy, HostListener, ViewEncapsulation } from '@angular/core';
-import { MenuItem } from '../../models/menu.interface';
+import { Component, Input, ChangeDetectionStrategy, HostListener } from '@angular/core';
 import { Router } from '@angular/router';
+import { MenuItem } from '../../models/menu.interface';
 
 @Component({
 	selector: 'vb-menu-link',

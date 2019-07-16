@@ -6,9 +6,7 @@
         align-items: center;
         height: $sidebar-brand-height;
 
-        > a {
-            text-transform: uppercase;
-            font-weight: bold;
+        > #brand {
             flex-grow: 1;
             overflow: hidden;
             white-space: nowrap;
