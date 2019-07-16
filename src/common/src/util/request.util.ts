@@ -1,13 +1,27 @@
 import { HttpParams } from '@angular/common/http';
+import { Router } from '@angular/router';
 import { StringFilter } from './filter.util';
 
-export function redirect(url: string): void
+export function navigate(route: string[], newTab: boolean, router: Router) {
+	if (newTab) {
+		const path = router.createUrlTree(route).toString();
+		const url = window.location.origin + (path.startsWith('/') ? '' : '/') + path;
+		redirect(url, true);
+	} else {
+		router.navigate(route);
+	}
+}
+export function redirect(url: string, newTab: boolean)
 {
 	if (!url.includes('//')) {
 		url = '//' + url;
 	}
 
-	window.location.href = url;
+	if (newTab) {
+		window.open(url, '_blank');
+	} else {
+		window.location.href = url;
+	}
 }
 
 export function getDomainName() {

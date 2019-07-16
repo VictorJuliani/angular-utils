@@ -7,6 +7,8 @@ import { EnumLowerCasePipe } from './pipes/enum-lower-case.pipe';
 import { NullOptionPipe } from './pipes/null-option.pipe';
 import { OptionPipe } from './pipes/option.pipe';
 import { SanitizeHtmlPipe } from './pipes/sanitize-html.pipe';
+import { SanitizeUrlPipe } from './pipes/sanitize-url.pipe';
+import { PropertyPipe } from './pipes/property.pipe';
 
 const components = [
 	EnumTitleCasePipe,
@@ -14,6 +16,8 @@ const components = [
 	NullOptionPipe,
 	OptionPipe,
 	SanitizeHtmlPipe,
+	SanitizeUrlPipe,
+	PropertyPipe,
 	SpinnerComponent
 ];
 

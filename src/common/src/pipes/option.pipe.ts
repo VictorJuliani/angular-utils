@@ -6,7 +6,7 @@ import { Option } from '../models/option.interface';
 })
 export class OptionPipe implements PipeTransform
 {
-	transform(value: any[], property = 'vbuid', sort = true): Option[]
+	transform(value: any[], property: string, sort = true): Option[]
 	{
 		const options = value.map(i => {
 			return {

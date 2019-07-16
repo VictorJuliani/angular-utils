@@ -10,8 +10,10 @@ export { EnumLowerCasePipe } from './src/pipes/enum-lower-case.pipe';
 export { EnumTitleCasePipe } from './src/pipes/enum-title-case.pipe';
 export { NullOptionPipe } from './src/pipes/null-option.pipe';
 export { OptionPipe } from './src/pipes/option.pipe';
+export { PropertyPipe } from './src/pipes/property.pipe';
 export { SanitizeHtmlPipe } from './src/pipes/sanitize-html.pipe';
+export { SanitizeUrlPipe } from './src/pipes/sanitize-url.pipe';
 // util
-export { redirect, setFilterParams, getDomainName } from './src/util/request.util';
+export { redirect, navigate, setFilterParams, getDomainName } from './src/util/request.util';
 export { StringFilter, enumToStringArray, toFilterString } from './src/util/filter.util';
 export { getTokenExpirationDate, decodeToken, isTokenExpired } from './src/util/jwt.util';
