@@ -1,5 +1,3 @@
-import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
-
 export type Menu = (MenuCategory | MenuItem)[];
 
 export interface MenuCategory {
@@ -9,7 +7,7 @@ export interface MenuCategory {
 
 export interface MenuItem {
 	label: string;
-	icon?: IconDefinition;
+	icon: string;
 	badge?: MenuBadge;
 	action?: Function;
 	link?: string;

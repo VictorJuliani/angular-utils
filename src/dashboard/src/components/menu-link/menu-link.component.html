@@ -1,3 +1,3 @@
-<fa-icon *ngIf="icon" [class.icon-bullet]="overrideIcon" [icon]="icon" [size]="size"></fa-icon>
+<mat-icon [class.icon-bullet]="isSubItem">{{ isSubItem ? 'radio_button_unchecked' : item.icon }}</mat-icon>
 <span class="menu-text">{{ item.label | translate }}</span>
 <span *ngIf="item.badge" class="badge badge-pill" [ngClass]="item.badge.class">{{ item.badge.text }}</span>

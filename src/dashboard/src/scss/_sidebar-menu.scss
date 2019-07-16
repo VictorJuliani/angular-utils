@@ -20,22 +20,20 @@
         padding: 10px 15px;
         margin: 10px 15px 0;
 
-        &:hover > fa-icon {
+        &:hover > mat-icon {
             display: inline-block;
             animation: swing ease-in-out .5s 1 alternate;
         }
 
-        fa-icon {
+        mat-icon {
             // margin-right: 10px;
             // font-size: 12px;
             // text-align: center;
             // flex-shrink: 0;
 
             font-size: 24px;
-            // float: left;
             margin-right: 15px;
             line-height: 30px;
-            // width: 30px;
             text-align: center;
 
             &.icon-bullet {
@@ -64,7 +62,7 @@
     }
 
     .sidebar-dropdown {
-        > vb-menu-link + fa-icon {
+        > vb-menu-link + mat-icon {
             display: inline-block;
             font-style: normal;
             font-variant: normal;
@@ -106,7 +104,7 @@
             }
         }
 
-        &.active > vb-menu-link + fa-icon {
+        &.active > vb-menu-link + mat-icon {
             transform: rotate(90deg);
             right: 15px;
         }

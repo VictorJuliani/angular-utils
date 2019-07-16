@@ -39,7 +39,7 @@
         -o-transition: all .3s ease;
         transition: all .3s ease;
 
-        fa-icon {
+        mat-icon {
             transition: all 1s ease;
         }
     }
@@ -107,7 +107,7 @@
             .sidebar-menu .header-menu,
             .sidebar-menu .sidebar-submenu,
             .sidebar-menu ul > li > vb-menu-link > span,
-            .sidebar-menu ul > li > vb-menu-link + fa-icon,
+            .sidebar-menu ul > li > vb-menu-link + mat-icon,
             .sidebar-footer > div:not(.pinned-footer) {
                 display: none !important;
             }
@@ -135,7 +135,7 @@
     }
 
     .sidebar-menu ul li {
-        fa-icon, vb-menu-link {
+        mat-icon, vb-menu-link {
             border-radius: $border-radius;
         }
     }
@@ -144,7 +144,7 @@
         border-top-left-radius: $border-radius;
         border-top-right-radius: $border-radius;
 
-        .notification-content fa-icon,
+        .notification-content mat-icon,
         .message-content .pic {
             border-radius: $border-radius;
         }

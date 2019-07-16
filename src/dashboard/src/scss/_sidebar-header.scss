@@ -5,7 +5,7 @@
         overflow: hidden;
 
         .user-pic {
-            width: 60px;
+            max-width: 60px;
             padding: 2px;
             margin: auto 15px auto 0;
             overflow: hidden;
@@ -14,6 +14,12 @@
                 object-fit: cover;
                 height: 100%;
                 width: 100%;
+            }
+
+            mat-icon {
+                font-size: 4em;
+                height: auto;
+                width: auto;
             }
         }
 
@@ -32,9 +38,9 @@
 
             .user-status {
                 font-size: 11px;
-                margin-top: 4px;
+                text-align: center;
 
-                fa-icon {
+                mat-icon {
                     font-size: 8px;
                     margin-right: 4px;
                     color: #5cb85c;

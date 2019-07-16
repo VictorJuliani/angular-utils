@@ -5,7 +5,7 @@
 	[class.pinned]="pinned"
 >
 	<div id="toggle-sidebar" *ngIf="isSmallScreen && isCompressed" (click)="compress()">
-		<fa-icon [icon]="[ 'fas', 'bars' ]" size="1.5x"></fa-icon>
+		<mat-icon>menu</mat-icon>
 	</div>
 	<nav id="sidebar" class="sidebar-wrapper"
 		(mouseenter)="hover(true)"
@@ -16,8 +16,8 @@
 			<div class="sidebar-item sidebar-brand">
 				<ng-content select="[id=brand]"></ng-content>
 				<div id="pin-sidebar" (click)="compress()">
-					<fa-icon *ngIf="!isCompressed" [icon]="[ 'fas', 'times' ]" size="1.5x"></fa-icon>
-					<fa-icon *ngIf="isCompressed" [icon]="[ 'fas', 'bars' ]" size="1.5x"></fa-icon>
+					<mat-icon *ngIf="!isCompressed">close</mat-icon>
+					<mat-icon *ngIf="isCompressed">menu</mat-icon>
 				</div>
 			</div>
 
@@ -25,7 +25,7 @@
 			<div *ngIf="config.showHeader" class="sidebar-item sidebar-header d-flex flex-nowrap">
 				<div class="user-pic">
 					<img *ngIf="activeUser.picture" class="img-responsive img-rounded" [attr.src]="activeUser.picture" alt="User picture">
-					<fa-icon *ngIf="!activeUser.picture"  class="img-responsive img-rounded" [icon]="[ 'fas', 'user' ]" size="2x"></fa-icon>
+					<mat-icon *ngIf="!activeUser.picture">person</mat-icon>
 				</div>
 				<div class="user-info">
 					<span class="user-name">
@@ -33,7 +33,7 @@
 					</span>
 					<span class="user-role">{{ role | titlecase }}</span>
 					<span *ngIf="status" class="user-status">
-						<fa-icon [icon]="[ 'fas', 'circle' ]"></fa-icon>
+						<mat-icon>radio_button_checked</mat-icon>
 						<span>{{ status }}</span>
 					</span>
 				</div>
@@ -50,7 +50,7 @@
 					>
 					<div class="input-group-append">
 						<span class="input-group-text">
-							<fa-icon [icon]="[ 'fas', 'search' ]"></fa-icon>
+							<mat-icon>search</mat-icon>
 						</span>
 					</div>
 				</div>

@@ -9,12 +9,8 @@ import { MenuItem } from '../../models/menu.interface';
 })
 export class MenuLinkComponent {
 	@Input() item: MenuItem;
-	@Input() overrideIcon: any;
+	@Input() isSubItem: boolean;
 	@Input() size: string;
-
-	get icon() {
-		return this.overrideIcon || this.item.icon;
-	}
 
 	constructor(private router: Router) {}
 
