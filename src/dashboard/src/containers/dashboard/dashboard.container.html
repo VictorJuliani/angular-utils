@@ -1,61 +1,76 @@
-<ngx-loading-bar *ngIf="loadingBar" [includeSpinner]="includeSpinner" [color]="loadingColor"></ngx-loading-bar>
-
 <!-- https://github.com/azouaoui-med/pro-sidebar-template -->
-<div class="page-wrapper chiller-theme" [class.toggled]="toggled">
-	<a id="show-sidebar" class="btn pointer" (click)="open()">
-		<fa-icon [icon]="[ 'fas', 'bars' ]" size="2x"></fa-icon>
-	</a>
-	<nav id="sidebar" class="sidebar-wrapper">
+<div class="page-wrapper border-radius-on"
+	[ngClass]="theme + '-theme'"
+	[class.toggled]="toggled"
+	[class.pinned]="pinned"
+>
+	<div id="toggle-sidebar" *ngIf="isSmallScreen && isCompressed" (click)="compress()">
+		<fa-icon [icon]="[ 'fas', 'bars' ]" size="1.5x"></fa-icon>
+	</div>
+	<nav id="sidebar" class="sidebar-wrapper"
+		(mouseenter)="hover(true)"
+		(mouseleave)="hover(false)"
+	>
 		<div class="sidebar-content">
-			<div class="sidebar-brand">
+			<!-- sidebar-brand  -->
+			<div class="sidebar-item sidebar-brand">
 				<a>{{ brand }}</a>
-				<div id="close-sidebar" (click)="close()">
-					<fa-icon [icon]="[ 'fas', 'times' ]" size="1.5x"></fa-icon>
+				<div id="pin-sidebar" (click)="compress()">
+					<fa-icon *ngIf="!isCompressed" [icon]="[ 'fas', 'times' ]" size="1.5x"></fa-icon>
+					<fa-icon *ngIf="isCompressed" [icon]="[ 'fas', 'bars' ]" size="1.5x"></fa-icon>
 				</div>
 			</div>
-			<!-- sidebar-header -->
-			<div class="sidebar-header">
-				<div class="d-flex mb-1">
-					<div class="user-pic">
-						<img *ngIf="user.picture" class="img-responsive img-rounded" [attr.src]="user.picture" alt="User picture">
-						<fa-icon *ngIf="!user.picture" [icon]="[ 'fas', 'user' ]" size="2x"></fa-icon>
-					</div>
-					<div class="user-info my-auto">
-						<span class="user-name">
-							{{ user.name }}
-						</span>
-						<span class="user-role">{{ role }}</span>
-						<!-- <span class="user-status">
-							<i class="fa fa-circle"></i>
-							<span>Online</span>
-						</span> -->
-					</div>
+
+			<!-- sidebar-header  -->
+			<div *ngIf="showHeader" class="sidebar-item sidebar-header d-flex flex-nowrap">
+				<div class="user-pic">
+					<img *ngIf="activeUser.picture" class="img-responsive img-rounded" [attr.src]="activeUser.picture" alt="User picture">
+					<fa-icon *ngIf="!activeUser.picture"  class="img-responsive img-rounded" [icon]="[ 'fas', 'user' ]" size="2x"></fa-icon>
+				</div>
+				<div class="user-info">
+					<span class="user-name">
+						{{ activeUser.name }}
+					</span>
+					<span class="user-role">{{ role | titlecase }}</span>
+					<span *ngIf="status" class="user-status">
+						<fa-icon [icon]="[ 'fas', 'circle' ]"></fa-icon>
+						<span>{{ status }}</span>
+					</span>
 				</div>
 				<ng-content select=".sidebar-header-extra"></ng-content>
 			</div>
-			<!-- <div class="sidebar-search">
-				<div>
-					<div class="input-group">
-						<input type="text" class="form-control search-menu" placeholder="Search...">
-						<div class="input-group-append">
-							<span class="input-group-text">
-								<i class="fa fa-search" aria-hidden="true"></i>
-							</span>
-						</div>
+
+			<!-- sidebar-search  -->
+			<div *ngIf="showSearch" class="sidebar-item sidebar-search">
+				<div class="input-group">
+					<input type="text"
+						class="form-control search-menu"
+						placeholder="{{ 'Search' | translate }}..."
+						(input)="onSearch($event.target.value)"
+					>
+					<div class="input-group-append">
+						<span class="input-group-text">
+							<fa-icon [icon]="[ 'fas', 'search' ]"></fa-icon>
+						</span>
 					</div>
 				</div>
-			</div> -->
+			</div>
+
 			<!-- sidebar-menu -->
-			<vb-menu class="sidebar-menu" [menu]="activeMenu"></vb-menu>
+			<vb-menu class="sidebar-item sidebar-menu" [menu]="activeMenu"></vb-menu>
+
+			<!-- sidebar-footer  -->
+			<!-- TODO
+			<vb-menu-footer *ngIf="footer" class="sidebar-footer">
+			</vb-menu-footer>
+			 -->
 		</div>
 	</nav>
 
 	<main class="page-content">
-		<div class="container-fluid">
-			<ng-content select="header"></ng-content>
-			<ng-content></ng-content>
-			<router-outlet></router-outlet>
-			<ng-content select="footer"></ng-content>
-		</div>
+		<div id="overlay" class="overlay"></div>
+		<ng-content select="header"></ng-content>
+		<ng-content></ng-content>
+		<ng-content select="footer"></ng-content>
 	</main>
 </div>

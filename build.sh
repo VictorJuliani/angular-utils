@@ -23,5 +23,4 @@ ng build filemanager
 
 
 # copy assets
-cp -r ./src/dashboard/assets ./dist/dashboard/assets
 cp -r ./src/filemanager/assets ./dist/filemanager/assets

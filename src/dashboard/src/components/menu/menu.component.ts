@@ -1,4 +1,4 @@
-import { Component, Input, ChangeDetectionStrategy } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 // models
 import { Menu, MenuItem } from '../../models/menu.interface';
 
@@ -13,15 +13,16 @@ export class MenuComponent
 	selectedMenu: MenuItem;
 
 	isHeader(item: Menu) {
-		return !!item['name'];
+		return !this.isMenu(item) && !this.isLink(item);
 	}
 
 	isMenu(item: Menu) {
-		return !!item['subItems'];
+		return !!item['subMenu'];
 	}
 
 	isLink(item: Menu) {
-		return !!item['label'] && !item['subItems'];
+		const props = [ 'action', 'link', 'route' ];
+		return !this.isMenu(item) && props.find(p => !!item[p]);
 	}
 
 	selectMenu(item: MenuItem) {

@@ -36,4 +36,4 @@ library.add(faBars, faTimes, faUser, faAngleRight, faCircle);
 		PageNotFoundComponent
 	]
 })
-export class DashboardModule {}
+export class VbDashboardModule {}

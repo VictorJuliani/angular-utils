@@ -1,19 +1,22 @@
 <ul>
-	<li *ngFor="let item of menu" [class.header-menu]="isHeader(item)" [class.sidebar-dropdown]="isMenu(item)" [class.active]="selectedMenu === item">
-
-		<span *ngIf="isHeader(item)">{{ item.name | translate }}</span>
+	<li *ngFor="let item of menu"
+		class="position-relative"
+		[class.header-menu]="isHeader(item)"
+		[class.sidebar-dropdown]="isMenu(item)"
+		[class.active]="selectedMenu === item"
+	>
+		<span *ngIf="isHeader(item)">{{ item.label | translate }}</span>
 		<ng-container *ngIf="isMenu(item)">
-			<!-- FIXME: replace pseudo elements on "a" & "li" with actual elements -->
-			<a class="pointer" (click)="selectMenu(item)" vb-menu-link [item]="item"></a>
-			<div class="sidebar-menu" [class.d-none]="selectedMenu !== item">
+			<vb-menu-link class="pointer" (click)="selectMenu(item)" [item]="item"></vb-menu-link>
+			<fa-icon class="pointer" [icon]="[ 'fas', 'caret-right' ]"></fa-icon>
+			<div class="sidebar-submenu" [class.invisible]="selectedMenu !== item">
 				<ul>
-					<li *ngFor="let sub of item.subItems">
-						<a class="pointer" vb-menu-link [item]="sub"></a>
+					<li *ngFor="let sub of item.subMenu">
+						<vb-menu-link class="pointer" [item]="sub" [overrideIcon]="['fas', 'circle' ]" size="xs"></vb-menu-link>
 					</li>
 				</ul>
 			</div>
 		</ng-container>
-		<a *ngIf="isLink(item)" class="pointer" vb-menu-link [item]="item"></a>
-
+		<vb-menu-link *ngIf="isLink(item)" class="pointer" [item]="item"></vb-menu-link>
 	</li>
 </ul>

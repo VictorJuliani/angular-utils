@@ -1,14 +1,20 @@
-import { Component, Input, ChangeDetectionStrategy, HostListener } from '@angular/core';
+import { Component, Input, ChangeDetectionStrategy, HostListener, ViewEncapsulation } from '@angular/core';
 import { MenuItem } from '../../models/menu.interface';
 import { Router } from '@angular/router';
 
 @Component({
-	selector: 'a[vb-menu-link]',
+	selector: 'vb-menu-link',
 	templateUrl: 'menu-link.component.html',
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class MenuLinkComponent {
 	@Input() item: MenuItem;
+	@Input() overrideIcon: any;
+	@Input() size: string;
+
+	get icon() {
+		return this.overrideIcon || this.item.icon;
+	}
 
 	constructor(private router: Router) {}
 

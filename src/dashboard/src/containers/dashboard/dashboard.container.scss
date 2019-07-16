@@ -1,0 +1,169 @@
+@import "../../scss/variables";
+@import "../../scss/animation";
+@import "../../scss/sidebar-wrapper";
+
+// FIXME: :host cannot be used with ViewEncapsulation.None
+vb-dashboard {
+    display: flex;
+    flex: 1;
+}
+
+/*----------------page-wrapper----------------*/
+.page-wrapper {
+    display: flex;
+    flex: 1;
+
+    .page-content {
+        display: flex;
+        flex: 1;
+        width: 100%;
+        transition: padding-left .3s ease;
+        overflow-x: hidden;
+
+        @media screen and (min-width: 768px) {
+            padding-left: $sidebar-width;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            z-index: 998;
+            background: #000;
+            opacity: .5;
+            display: none;
+        }
+    }
+
+    #pin-sidebar, #toggle-sidebar {
+        cursor: pointer;
+        -webkit-transition: all .3s ease;
+        -moz-transition: all .3s ease;
+        -ms-transition: all .3s ease;
+        -o-transition: all .3s ease;
+        transition: all .3s ease;
+
+        fa-icon {
+            transition: all 1s ease;
+        }
+    }
+
+    #toggle-sidebar {
+        margin: 15px;
+        position: absolute;
+    }
+
+    &.toggled {
+        .sidebar-wrapper {
+            left: 0px;
+        }
+
+        .page-content {
+            @media screen and (min-width: 768px) {
+                padding-left: $sidebar-width;
+            }
+
+            .overlay {
+                @media screen and (max-width: 768px) {
+                    display: block;
+                }
+            }
+        }
+
+        &.pinned {
+            .page-content {
+                @media screen and (min-width: 768px) {
+                    padding-left: $sidebar-pinned-width;
+                }
+            }
+        }
+    }
+
+    &.pinned {
+        .sidebar-wrapper {
+            width: $sidebar-pinned-width;
+
+            .sidebar-header {
+                padding: 10px;
+
+                .user-pic {
+                    margin: auto;
+                    width: auto;
+                    max-width: 50px;
+                    float: none;
+
+                    img {
+                        margin: auto;
+                    }
+                }
+            }
+
+            #pin-sidebar {
+                margin: auto;
+            }
+
+            .sidebar-brand a {
+                display: none;
+            }
+
+            .sidebar-search input,
+            .sidebar-header .user-info,
+            .sidebar-menu .header-menu,
+            .sidebar-menu .sidebar-submenu,
+            .sidebar-menu ul > li > vb-menu-link > span,
+            .sidebar-menu ul > li > vb-menu-link + fa-icon,
+            .sidebar-footer > div:not(.pinned-footer) {
+                display: none !important;
+            }
+
+            .sidebar-search .input-group-text {
+                height: 35px;
+            }
+
+            .sidebar-footer > div.pinned-footer {
+                display: block;
+            }
+        }
+    }
+}
+
+/*---- border-radius ------*/
+.border-radius-on {
+
+    .sidebar-header .user-pic {
+        border-radius: 12px;
+    }
+
+    .badge {
+        border-radius: 8px;
+    }
+
+    .sidebar-menu ul li fa-icon {
+        border-radius: $border-radius;
+    }
+
+    .sidebar-footer .dropdown-menu {
+        border-top-left-radius: $border-radius;
+        border-top-right-radius: $border-radius;
+
+        .notification-content fa-icon,
+        .message-content .pic {
+            border-radius: $border-radius;
+        }
+    }
+
+    .sidebar-search {
+        input {
+
+            border-top-left-radius: $border-radius;
+            border-bottom-left-radius: $border-radius;
+        }
+
+        .input-group-append .input-group-text {
+            border-top-right-radius: $border-radius;
+            border-bottom-right-radius: $border-radius;
+        }
+    }
+}

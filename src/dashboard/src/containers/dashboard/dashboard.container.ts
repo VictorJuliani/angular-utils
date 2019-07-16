@@ -1,41 +1,57 @@
-import { Component, Input, OnChanges, SimpleChanges, ChangeDetectionStrategy } from '@angular/core';
-// models
+import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges,
+	ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
 import { User } from '@vonbraunlabs/app-state';
 import { Menu } from '../../models/menu.interface';
 
 @Component({
 	selector: 'vb-dashboard',
-	templateUrl: './dashboard.container.html',
+	templateUrl: 'dashboard.container.html',
+	styleUrls: [ 'dashboard.container.scss', '../../scss/sidebar-themes.scss' ],
+	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class DashboardContainer implements OnChanges
 {
-	readonly MAIN_ROLES = [ 'admin', 'distributer', 'user' ];
+	/**
+	 * TODO:
+	 * - Remove this ViewEncapsulation and make classes attached to children only (ShadowDom maybe?)
+	 * - Replace font awesome with mat icons
+	 * - Improve some layout coloring
+	 * - Publish new version
+	 */
+	private readonly MAIN_ROLES = [ 'admin', 'user' ];
+	public readonly isSmallScreen = window.innerWidth < 768;
 	@Input() menu: Menu;
-	@Input() loadingBar = false;
-	@Input() includeSpinner = true;
-	@Input() loadingColor = 'red';
+	@Input() theme: 'default' | 'chiller' | 'legacy' | 'cool' | 'ice' | 'light' = 'default';
+	@Input() showHeader: boolean;
+	@Input() showSearch: boolean;
 	@Input() brand: string;
 	@Input() user: User;
+	@Input() status: string;
+	@Output() search = new EventEmitter<string>();
 
-	toggled = window.innerWidth > 767;
+	// state properties
+	isHovering: boolean;
+	isCompressed = this.isSmallScreen;
+	hoverDelay: number;
 	activeMenu: Menu;
 
-	// ngOnInit() {
-	// 	if (!/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-	// 		$(".sidebar-content").mCustomScrollbar({
-	// 			axis: "y",
-	// 			autoHideScrollbar: true,
-	// 			scrollInertia: 300
-	// 		});
-	// 		$(".sidebar-content").addClass("desktop");
-	// 	}
-	// }
+	get activeUser(): User {
+		return this.user || { name: 'Unknown', roles: [] };
+	}
+
+	get pinned(): boolean {
+		return !this.isSmallScreen && this.isCompressed && !this.isHovering;
+	}
+
+	get toggled(): boolean {
+		return !this.isSmallScreen || !this.isCompressed;
+	}
 
 	get role() {
-		let role = this.user.roles.length ? this.user.roles[0].name : '';
+		let role = this.activeUser.roles.length ? this.activeUser.roles[0].name : 'user';
 		for (const r of this.MAIN_ROLES) {
-			if (r in this.user.roles) {
+			if (r in this.activeUser.roles) {
 				role = r;
 			}
 		}
@@ -48,17 +64,25 @@ export class DashboardContainer implements OnChanges
 			const roles = this.user ? this.user.roles.map(r => r.name) : [];
 			this.activeMenu = this.menu.filter(m => !m.roles || roles.find(r => m.roles.includes(r)));
 		}
+	}
 
-		if (!this.user) {
-			this.user = { name: 'Unknown', roles: [] };
+	onSearch(value: string) {
+		this.search.emit(value);
+	}
+
+	compress() {
+		this.hoverDelay = new Date().getTime();
+		this.isHovering = false;
+		this.isCompressed = !this.isCompressed;
+	}
+
+	hover(hover: boolean) {
+		const now = new Date().getTime();
+		if (now - this.hoverDelay < 300) {
+			return;
 		}
-	}
 
-	open() {
-		this.toggled = true;
-	}
-
-	close() {
-		this.toggled = false;
+		this.isHovering = hover;
+		this.hoverDelay = now;
 	}
 }

@@ -3,8 +3,7 @@ import { IconDefinition } from '@fortawesome/fontawesome-svg-core';
 export type Menu = (MenuCategory | MenuItem)[];
 
 export interface MenuCategory {
-	name: string;
-	badge?: MenuBadge;
+	label: string;
 	roles?: string[];
 }
 
@@ -15,7 +14,7 @@ export interface MenuItem {
 	action?: Function;
 	link?: string;
 	route?: string | string[];
-	subItems?: MenuItem[];
+	subMenu?: MenuItem[];
 	roles?: string[];
 }
 
