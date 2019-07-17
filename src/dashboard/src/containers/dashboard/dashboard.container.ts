@@ -18,7 +18,9 @@ export class DashboardContainer implements OnInit, OnChanges, OnDestroy
 {
 	public readonly isSmallScreen = window.innerWidth < 768;
 	private readonly MAIN_ROLES = [ 'admin', 'user' ];
-	private hover$$: Subject<boolean>;
+	private hover$$: Subject<boolean> = new Subject<boolean>()
+		.pipe(throttleTime(300, undefined, { trailing: true, leading: true })) as AnonymousSubject<boolean>;
+
 	@Input() menu: Menu;
 	@Input() config: DashboardConfig;
 	@Input() user: User;
@@ -57,11 +59,6 @@ export class DashboardContainer implements OnInit, OnChanges, OnDestroy
 
 	ngOnInit() {
 		this.isCompressed = this.isSmallScreen || this.config.startCompressed;
-		this.hover$$ = new Subject()
-			.pipe(
-				throttleTime(300)
-			) as AnonymousSubject<boolean>;
-
 		this.hover$$
 			.subscribe(hover => {
 				this.isHovering = hover;

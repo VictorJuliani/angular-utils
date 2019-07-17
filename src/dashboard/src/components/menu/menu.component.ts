@@ -34,7 +34,12 @@ export class MenuComponent implements OnInit
 	}
 
 	onSelect(item: MenuItem, event: MouseEvent, parent?: MenuItem) {
-		const newTab = 1 === event.button || event.ctrlKey;
+		const newTab = 1 === event.button || event.ctrlKey || event.metaKey;
+		const selection = window.getSelection();
+
+		if (!newTab && selection && selection.toString().length) {
+			return;
+		}
 
 		if (item.action) {
 			item.action();
