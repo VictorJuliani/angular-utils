@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges,
-	ChangeDetectionStrategy, ViewEncapsulation } from '@angular/core';
+	ChangeDetectionStrategy, ViewEncapsulation, OnInit } from '@angular/core';
 import { User } from '@vonbraunlabs/app-state';
 import { Menu } from '../../models/menu.interface';
 import { DashboardConfig } from '../../models/config.interface';
@@ -7,11 +7,11 @@ import { DashboardConfig } from '../../models/config.interface';
 @Component({
 	selector: 'vb-dashboard',
 	templateUrl: 'dashboard.container.html',
-	styleUrls: [ 'dashboard.container.scss', '../../scss/dashboard.scss', '../../scss/sidebar-themes.scss' ],
+	styleUrls: [ '../../scss/dashboard.scss', '../../scss/sidebar-themes.scss' ],
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardContainer implements OnChanges
+export class DashboardContainer implements OnInit, OnChanges
 {
 	private readonly MAIN_ROLES = [ 'admin', 'user' ];
 	public readonly isSmallScreen = window.innerWidth < 768;
@@ -23,7 +23,7 @@ export class DashboardContainer implements OnChanges
 
 	// state properties
 	isHovering: boolean;
-	isCompressed = this.isSmallScreen;
+	isCompressed: boolean;
 	hoverDelay: number;
 	activeMenu: Menu;
 
@@ -48,6 +48,10 @@ export class DashboardContainer implements OnChanges
 		}
 
 		return role;
+	}
+
+	ngOnInit() {
+		this.isCompressed = this.isSmallScreen || this.config.startCompressed;
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
