@@ -3,7 +3,7 @@
 		class="position-relative"
 		[class.header-menu]="isHeader(item)"
 		[class.sidebar-dropdown]="isMenu(item)"
-		[class.active]="selectedItem === item"
+		[class.active]="activeItem === item"
 	>
 		<span *ngIf="isHeader(item)">{{ item.label | translate }}</span>
 		<!-- TODO: find a way to allow customizing background-color & box-shadow color for selectedItem (through input or smth) -->
@@ -12,17 +12,17 @@
 			class="pointer"
 			[item]="item"
 			[hasCaret]="isMenu(item)"
-			(selected)="selectItem(item)">
+			(selected)="onSelect(item, $event)">
 		</vb-menu-link>
 
-		<div *ngIf="isMenu(item)" class="sidebar-submenu" [class.invisible]="selectedItem !== item">
+		<div *ngIf="isMenu(item)" class="sidebar-submenu" [class.invisible]="activeItem !== item">
 			<ul>
 				<li *ngFor="let sub of item.subMenu">
 					<vb-menu-link
 						class="pointer"
 						[item]="sub"
 						[isSubItem]="true"
-						(selected)="selectItem(item)">
+						(selected)="onSelect(sub, $event, item)">
 					</vb-menu-link>
 				</li>
 			</ul>

@@ -1,4 +1,5 @@
-export type Menu = (MenuCategory | MenuItem)[];
+export type Menu = MenuEntry[];
+export type MenuEntry = MenuCategory | MenuItem;
 
 export interface MenuCategory {
 	label: string;
@@ -11,7 +12,7 @@ export interface MenuItem {
 	badge?: MenuBadge;
 	action?: Function;
 	link?: string;
-	route?: string | string[];
+	route?: string[];
 	subMenu?: MenuItem[];
 	roles?: string[];
 }
