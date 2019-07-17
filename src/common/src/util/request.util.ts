@@ -1,14 +1,18 @@
 import { HttpParams } from '@angular/common/http';
-import { Router } from '@angular/router';
+import { Router, NavigationExtras, UrlTree } from '@angular/router';
 import { StringFilter } from './filter.util';
 
-export function navigate(route: string[], newTab: boolean, router: Router) {
+export function navigate(route: string[] | UrlTree, newTab: boolean, router: Router, extras?: NavigationExtras) {
 	if (newTab) {
-		const path = router.createUrlTree(route).toString();
+		const path = (route instanceof UrlTree ? route : router.createUrlTree(route, extras)).toString();
 		const url = window.location.origin + (path.startsWith('/') ? '' : '/') + path;
 		redirect(url, true);
 	} else {
-		router.navigate(route);
+		if (Array.isArray(route)) {
+			router.navigate(route, extras);
+		} else {
+			router.navigateByUrl(route, extras);
+		}
 	}
 }
 export function redirect(url: string, newTab: boolean)
