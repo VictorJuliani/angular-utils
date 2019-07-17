@@ -1,5 +1,8 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges,
-	ChangeDetectionStrategy, ViewEncapsulation, OnInit } from '@angular/core';
+	ChangeDetectionStrategy, ViewEncapsulation, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
+import { Subject } from 'rxjs';
+import { throttleTime } from 'rxjs/operators';
+import { AnonymousSubject } from 'rxjs/internal/Subject';
 import { User } from '@vonbraunlabs/app-state';
 import { Menu } from '../../models/menu.interface';
 import { DashboardConfig } from '../../models/config.interface';
@@ -11,10 +14,11 @@ import { DashboardConfig } from '../../models/config.interface';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardContainer implements OnInit, OnChanges
+export class DashboardContainer implements OnInit, OnChanges, OnDestroy
 {
-	private readonly MAIN_ROLES = [ 'admin', 'user' ];
 	public readonly isSmallScreen = window.innerWidth < 768;
+	private readonly MAIN_ROLES = [ 'admin', 'user' ];
+	private hover$$: Subject<boolean>;
 	@Input() menu: Menu;
 	@Input() config: DashboardConfig;
 	@Input() user: User;
@@ -24,7 +28,6 @@ export class DashboardContainer implements OnInit, OnChanges
 	// state properties
 	isHovering: boolean;
 	isCompressed: boolean;
-	hoverDelay: number;
 	activeMenu: Menu;
 
 	get activeUser(): User {
@@ -41,17 +44,29 @@ export class DashboardContainer implements OnInit, OnChanges
 
 	get role() {
 		let role = this.activeUser.roles.length ? this.activeUser.roles[0].name : 'user';
-		for (const r of this.MAIN_ROLES) {
-			if (r in this.activeUser.roles) {
-				role = r;
+		for (const r of this.activeUser.roles) {
+			if (r.name in this.MAIN_ROLES) {
+				role = r.name;
 			}
 		}
 
 		return role;
 	}
 
+	constructor(private changeDetector: ChangeDetectorRef) {}
+
 	ngOnInit() {
 		this.isCompressed = this.isSmallScreen || this.config.startCompressed;
+		this.hover$$ = new Subject()
+			.pipe(
+				throttleTime(300)
+			) as AnonymousSubject<boolean>;
+
+		this.hover$$
+			.subscribe(hover => {
+				this.isHovering = hover;
+				this.changeDetector.markForCheck();
+			});
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -61,23 +76,21 @@ export class DashboardContainer implements OnInit, OnChanges
 		}
 	}
 
+	ngOnDestroy() {
+		this.hover$$.complete();
+	}
+
 	onSearch(value: string) {
 		this.search.emit(value);
 	}
 
 	compress() {
-		this.hoverDelay = new Date().getTime();
 		this.isHovering = false;
 		this.isCompressed = !this.isCompressed;
+		this.hover$$.next(this.isHovering);
 	}
 
 	hover(hover: boolean) {
-		const now = new Date().getTime();
-		if (now - this.hoverDelay < 300) {
-			return;
-		}
-
-		this.isHovering = hover;
-		this.hoverDelay = now;
+		this.hover$$.next(hover);
 	}
 }

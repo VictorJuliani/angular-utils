@@ -19,6 +19,10 @@ export class MenuLinkComponent {
 	@HostListener('click', ['$event'])
 	@HostListener('auxclick', ['$event'])
 	onClick(event: MouseEvent) {
+		if (event.button > 1) {
+			return;
+		}
+
 		const newTab = 1 === event.button || event.ctrlKey;
 
 		if (this.item.action) {
