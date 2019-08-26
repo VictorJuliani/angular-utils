@@ -1,24 +1,14 @@
 <!-- https://github.com/azouaoui-med/pro-sidebar-template -->
 <div class="page-wrapper border-radius-on"
 	[ngClass]="config.theme + '-theme'"
-	[class.toggled]="toggled"
-	[class.pinned]="pinned"
+	[class.visible]="isVisible"
+	[class.compressed]="isCompressed"
 >
-	<div id="toggle-sidebar" *ngIf="isSmallScreen && isCompressed" (click)="compress()">
-		<mat-icon>menu</mat-icon>
-	</div>
-	<nav id="sidebar" class="sidebar-wrapper"
-		(mouseenter)="hover(true)"
-		(mouseleave)="hover(false)"
-	>
+	<nav id="sidebar" class="sidebar-wrapper">
 		<div class="sidebar-content">
 			<!-- sidebar-brand  -->
 			<div class="sidebar-item sidebar-brand">
 				<ng-content select="[id=brand]"></ng-content>
-				<div id="pin-sidebar" (click)="compress()">
-					<mat-icon *ngIf="!isCompressed">close</mat-icon>
-					<mat-icon *ngIf="isCompressed">menu</mat-icon>
-				</div>
 			</div>
 
 			<!-- sidebar-header  -->

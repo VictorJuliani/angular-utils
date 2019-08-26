@@ -49,7 +49,7 @@
         position: absolute;
     }
 
-    &.toggled {
+    &.visible {
         .sidebar-wrapper {
             left: 0px;
         }
@@ -66,58 +66,56 @@
             }
         }
 
-        &.pinned {
-            .page-content {
-                @media screen and (min-width: 768px) {
-                    padding-left: $sidebar-pinned-width;
+        @media screen and (min-width: 768px) {
+            &.compressed {
+                .page-content {
+                    padding-left: $sidebar-compressed-width;
                 }
-            }
-        }
-    }
 
-    &.pinned {
-        .sidebar-wrapper {
-            width: $sidebar-pinned-width;
+                .sidebar-wrapper:not(:hover) {
+                    width: $sidebar-compressed-width;
 
-            .sidebar-header {
-                padding: 10px;
+                    .sidebar-header {
+                        padding: 10px;
 
-                .user-pic {
-                    margin: auto;
-                    width: auto;
-                    max-width: 50px;
-                    float: none;
+                        .user-pic {
+                            margin: auto;
+                            width: auto;
+                            max-width: 50px;
+                            float: none;
 
-                    img {
+                            img {
+                                margin: auto;
+                            }
+                        }
+                    }
+
+                    #pin-sidebar {
                         margin: auto;
                     }
+
+                    .sidebar-brand #brand {
+                        display: none;
+                    }
+
+                    .sidebar-search input,
+                    .sidebar-header .user-info,
+                    .sidebar-menu .header-menu,
+                    .sidebar-menu .sidebar-submenu,
+                    .sidebar-menu ul > li > vb-menu-link > span,
+                    .sidebar-menu ul > li > vb-menu-link mat-icon.icon-caret,
+                    .sidebar-footer > div:not(.pinned-footer) {
+                        display: none !important;
+                    }
+
+                    .sidebar-search .input-group-text {
+                        height: 35px;
+                    }
+
+                    .sidebar-footer > div.pinned-footer {
+                        display: block;
+                    }
                 }
-            }
-
-            #pin-sidebar {
-                margin: auto;
-            }
-
-            .sidebar-brand #brand {
-                display: none;
-            }
-
-            .sidebar-search input,
-            .sidebar-header .user-info,
-            .sidebar-menu .header-menu,
-            .sidebar-menu .sidebar-submenu,
-            .sidebar-menu ul > li > vb-menu-link > span,
-            .sidebar-menu ul > li > vb-menu-link mat-icon.icon-caret,
-            .sidebar-footer > div:not(.pinned-footer) {
-                display: none !important;
-            }
-
-            .sidebar-search .input-group-text {
-                height: 35px;
-            }
-
-            .sidebar-footer > div.pinned-footer {
-                display: block;
             }
         }
     }

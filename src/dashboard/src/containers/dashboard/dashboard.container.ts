@@ -1,8 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges,
-	ChangeDetectionStrategy, ViewEncapsulation, OnInit, OnDestroy, ChangeDetectorRef } from '@angular/core';
-import { Subject } from 'rxjs';
-import { throttleTime } from 'rxjs/operators';
-import { AnonymousSubject } from 'rxjs/internal/Subject';
+	ChangeDetectionStrategy, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
 import { User } from '@vonbraunlabs/app-state';
 import { Menu } from '../../models/menu.interface';
 import { DashboardConfig } from '../../models/config.interface';
@@ -14,33 +11,25 @@ import { DashboardConfig } from '../../models/config.interface';
 	encapsulation: ViewEncapsulation.None,
 	changeDetection: ChangeDetectionStrategy.OnPush
 })
-export class DashboardContainer implements OnInit, OnChanges, OnDestroy
+export class DashboardContainer implements OnInit, OnChanges
 {
-	public readonly isSmallScreen = window.innerWidth < 768;
 	private readonly MAIN_ROLES = [ 'admin', 'user' ];
-	private hover$$: Subject<boolean> = new Subject<boolean>()
-		.pipe(throttleTime(300, undefined, { trailing: true, leading: true })) as AnonymousSubject<boolean>;
-
 	@Input() menu: Menu;
 	@Input() config: DashboardConfig;
 	@Input() user: User;
 	@Input() status: string;
+	@Input() isCompressed: boolean;
 	@Output() search = new EventEmitter<string>();
 
 	// state properties
-	isHovering: boolean;
-	isCompressed: boolean;
+	isSmallScreen: boolean;
 	activeMenu: Menu;
 
 	get activeUser(): User {
 		return this.user || { name: 'Unknown', roles: [] };
 	}
 
-	get pinned(): boolean {
-		return !this.isSmallScreen && this.isCompressed && !this.isHovering;
-	}
-
-	get toggled(): boolean {
+	get isVisible(): boolean {
 		return !this.isSmallScreen || !this.isCompressed;
 	}
 
@@ -55,15 +44,9 @@ export class DashboardContainer implements OnInit, OnChanges, OnDestroy
 		return role;
 	}
 
-	constructor(private changeDetector: ChangeDetectorRef) {}
-
 	ngOnInit() {
 		this.isCompressed = this.isSmallScreen || this.config.startCompressed;
-		this.hover$$
-			.subscribe(hover => {
-				this.isHovering = hover;
-				this.changeDetector.markForCheck();
-			});
+		this.onResize();
 	}
 
 	ngOnChanges(changes: SimpleChanges) {
@@ -73,21 +56,12 @@ export class DashboardContainer implements OnInit, OnChanges, OnDestroy
 		}
 	}
 
-	ngOnDestroy() {
-		this.hover$$.complete();
+	@HostListener('window:resize')
+	onResize() {
+		this.isSmallScreen = window.innerWidth < 768;
 	}
 
 	onSearch(value: string) {
 		this.search.emit(value);
-	}
-
-	compress() {
-		this.isHovering = false;
-		this.isCompressed = !this.isCompressed;
-		this.hover$$.next(this.isHovering);
-	}
-
-	hover(hover: boolean) {
-		this.hover$$.next(hover);
 	}
 }
