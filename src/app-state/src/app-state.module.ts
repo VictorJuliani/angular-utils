@@ -8,6 +8,7 @@ import { ErrorState } from './store/error/error.state';
 import { LoadState } from './store/load/load.state';
 import { LangState } from './store/lang/lang.state';
 import { UserState } from './store/user/user.state';
+import { WindowState } from './store/window/window.state';
 // modules
 import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
@@ -30,7 +31,8 @@ import { AppStateConfig, APP_STATE_CONFIG } from './models/config.model';
 			ErrorState,
 			LangState,
 			LoadState,
-			UserState
+			UserState,
+			WindowState
 		])
 	],
 	declarations: [
