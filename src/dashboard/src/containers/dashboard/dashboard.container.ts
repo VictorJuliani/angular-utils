@@ -45,7 +45,7 @@ export class DashboardContainer implements OnInit, OnChanges
 	}
 
 	ngOnInit() {
-		this.isCompressed = this.isSmallScreen || this.config.startCompressed;
+		this.isCompressed = this.isCompressed || this.isSmallScreen;
 		this.onResize();
 	}
 
