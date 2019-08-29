@@ -66,7 +66,7 @@ export class AuthService
 				goTo += '?next=' + encodeURI(next);
 			}
 
-			redirect(goTo);
+			redirect(goTo, false);
 		}
 	}
 }
