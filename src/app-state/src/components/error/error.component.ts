@@ -3,7 +3,6 @@ import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { Store } from '@ngxs/store';
 import * as fromStore from '../../store';
-// models
 import { RequestError } from '../../models/request-error.interface';
 
 @Component({

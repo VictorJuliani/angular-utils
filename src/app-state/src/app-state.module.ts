@@ -10,7 +10,6 @@ import { LangState } from './store/lang/lang.state';
 import { UserState } from './store/user/user.state';
 import { WindowState } from './store/window/window.state';
 // modules
-import { NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { TranslateModule } from '@ngx-translate/core';
 // components
 import { ErrorComponent } from './components/error/error.component';
@@ -25,7 +24,6 @@ import { AppStateConfig, APP_STATE_CONFIG } from './models/config.model';
 @NgModule({
 	imports: [
 		CommonModule,
-		NgbAlertModule,
 		TranslateModule,
 		NgxsModule.forFeature([
 			ErrorState,

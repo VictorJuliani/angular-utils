@@ -9,7 +9,6 @@
     "umdModuleIds": {
       "@ngx-translate/core": "ngx-translate-core",
       "@ngxs/store": "ngxs-store",
-      "@ng-bootstrap/ng-bootstrap": "ngBootstrap",
       "@vonbraunlabs/translate": "translate"
     }
   }

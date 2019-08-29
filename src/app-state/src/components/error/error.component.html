@@ -1,11 +1,11 @@
-<ngb-alert *ngIf="error" [type]="type" [dismissible]="false">
+<div class="alert alert-{{ type }}" role="alert">
 	{{ error | error }}
-</ngb-alert>
+</div>
 
 <div *ngIf="errors$ | async as errors">
-	<ngb-alert *ngIf="errors.length" [type]="type" [dismissible]="false">
+	<div *ngIf="errors.length" class="alert alert-{{ type }}" role="alert">
 		<ul *ngFor="let err of errors" class="m-0">
 			<li>{{ err | error }}</li>
 		</ul>
-	</ngb-alert>
+	</div>
 </div>
