@@ -95,7 +95,13 @@
                     }
 
                     .sidebar-brand #brand {
-                        display: none;
+                        img {
+                            margin: auto;
+                        }
+
+                        > *:not(img) {
+                            display: none;
+                        }
                     }
 
                     .sidebar-search input,
