@@ -28,6 +28,7 @@
         max-height: calc(100% -#{$sidebar-footer-height});
         height: calc(100% - #{$sidebar-footer-height});
         overflow-y: auto;
+        overflow-x: hidden;
         position: relative;
     }
 
