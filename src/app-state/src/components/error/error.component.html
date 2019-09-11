@@ -1,4 +1,4 @@
-<div class="alert alert-{{ type }}" role="alert">
+<div *ngIf="error" class="alert alert-{{ type }}" role="alert">
 	{{ error | error }}
 </div>
 
