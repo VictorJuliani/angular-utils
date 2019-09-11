@@ -19,9 +19,11 @@ export class MenuComponent implements OnInit
 	constructor(private router: Router) {}
 
 	ngOnInit() {
-		this.activeItem = this.menu
+		const activeItems = this.menu
 			.filter(m => !this.isHeader(m))
-			.find((i: MenuItem) => this.isActive(i)) as MenuItem;
+			.sort((i1: MenuItem, i2: MenuItem) => this.countActiveRoutes(i2) - this.countActiveRoutes(i1));
+
+		this.activeItem = activeItems[0] as MenuItem;
 	}
 
 	isHeader(item: MenuEntry) {
@@ -31,6 +33,18 @@ export class MenuComponent implements OnInit
 
 	isMenu(item: MenuEntry) {
 		return !!item['subMenu'];
+	}
+
+	activeMenuColor(item: MenuItem) {
+		return item === this.activeItem
+			? this.config.activeMenuColor
+			: null;
+	}
+
+	activeMenuBoxShadow(item: MenuItem) {
+		return item === this.activeItem
+			? `0 4px 20px 0 rgba(0,0,0,.14), 0 7px 10px -5px ${this.config.activeMenuBoxShadowColor}`
+			: null;
 	}
 
 	onSelect(item: MenuItem, event: MouseEvent, parent?: MenuItem) {
@@ -54,14 +68,16 @@ export class MenuComponent implements OnInit
 		}
 	}
 
-	private isActive(item: MenuItem): boolean {
+	private countActiveRoutes(item: MenuItem): number {
 		if (this.isMenu(item)) {
-			return !!item.subMenu.find(i => this.isActive(i));
+			return Math.max.apply(Math, item.subMenu.map(i => this.countActiveRoutes(i)));
 		} else if (item.route) {
 			const tree = this.router.createUrlTree(item.route);
-			return this.router.isActive(tree, false);
+			if (this.router.isActive(tree, false)) {
+				return item.route.length;
+			}
 		}
 
-		return false;
+		return 0;
 	}
 }

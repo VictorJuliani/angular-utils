@@ -6,10 +6,11 @@
 		[class.active]="activeItem === item"
 	>
 		<span *ngIf="isHeader(item)">{{ item.label | translate }}</span>
-		<!-- TODO: find a way to allow customizing background-color & box-shadow color for selectedItem (through input or smth) -->
 		<vb-menu-link
 			*ngIf="!isHeader(item)"
 			class="pointer"
+			[style.background-color]="activeMenuColor(item)"
+			[style.box-shadow]="activeMenuBoxShadow(item)"
 			[item]="item"
 			[hasCaret]="isMenu(item)"
 			(selected)="onSelect(item, $event)">

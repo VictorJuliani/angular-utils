@@ -3,4 +3,5 @@ export interface DashboardConfig {
 	showHeader: boolean;
 	showSearch: boolean;
 	activeMenuColor?: string;
+	activeMenuBoxShadowColor?: string;
 }
