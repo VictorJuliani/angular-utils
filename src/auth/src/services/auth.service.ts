@@ -1,5 +1,6 @@
 import { Injectable, Inject } from '@angular/core';
 import { CookieService } from 'ngx-cookie-service';
+import { Subject } from 'rxjs';
 // models
 import { redirect } from '@vonbraunlabs/common';
 import { AuthConfig, AUTH_CONFIG } from '../models/config.interface';
@@ -8,10 +9,16 @@ import { stripProtocol } from '../util/auth.util';
 @Injectable({ providedIn: 'root' })
 export class AuthService
 {
+	private logout$$ = new Subject<void>();
+
 	constructor(
 		@Inject(AUTH_CONFIG) public config: AuthConfig,
 		private cookies: CookieService
 	) {}
+
+	public onLogout() {
+		return this.logout$$.asObservable();
+	}
 
 	/**
 	 * Set auth cookie with given token.
@@ -60,6 +67,7 @@ export class AuthService
 	{
 		const authDomain = stripProtocol(domain);
 		this.cookies.delete(this.config.authCookie, '/', authDomain);
+		this.logout$$.next();
 
 		if (goTo) {
 			if (next) {
