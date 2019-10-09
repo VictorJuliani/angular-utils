@@ -11,7 +11,7 @@ export class AuthGuard implements CanActivate, CanActivateChild
 	public canActivate(route: ActivatedRouteSnapshot, state: RouterStateSnapshot): boolean
 	{
 		if (!this.auth.isAuthed()) {
-			this.auth.logout(this.config.cookieDomain(), this.config.redirectUrl, window.location.href);
+			this.auth.logout(this.config.cookieDomain(), this.config.redirectUrl(), window.location.href);
 			return false;
 		}
 

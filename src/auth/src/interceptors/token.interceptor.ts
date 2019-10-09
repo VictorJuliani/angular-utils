@@ -29,7 +29,7 @@ export class TokenInterceptor implements HttpInterceptor
 				.pipe(
 					catchError((err: RequestError | HttpErrorResponse) => {
 						if (401 === err.status) {
-							this.auth.logout(this.config.cookieDomain(), this.config.redirectUrl, window.location.href);
+							this.auth.logout(this.config.cookieDomain(), this.config.redirectUrl(), this.config.nextOnError ? window.location.href : null);
 						}
 
 						return throwError(err);
