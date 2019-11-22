@@ -23,9 +23,9 @@ export const COLORS = {
 export const DUMMY_ENTRY = {
 	label: 'Dummy',
 	disabled: true,
-	value: 1000,
-	color: '#bababa',
-	opacity: 0.8,
+	value: 100,
+	color: amColor('#bababa'),
+	opacity: 0.3,
 	strokeDasharray: '4,4',
 	tooltip: ''
 };

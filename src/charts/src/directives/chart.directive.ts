@@ -1,6 +1,6 @@
 import { Directive, NgZone, OnChanges, OnDestroy, ElementRef, Input, Output, SimpleChanges, EventEmitter } from '@angular/core';
 // chart
-import { createFromConfig, useTheme, unuseTheme } from '@amcharts/amcharts4/core';
+import { createFromConfig, useTheme, unuseTheme, create } from '@amcharts/amcharts4/core';
 import { Chart } from '@amcharts/amcharts4/charts';
 import am4themes_animated from '@amcharts/amcharts4/themes/animated';
 // models
@@ -8,6 +8,7 @@ import { ChartEntry } from '../models/entry.model';
 
 @Directive({ selector: '[vbChart]' })
 export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
+	@Input() vbChart: T;
 	@Input() type: new() => T;
 	@Input() options: object;
 	@Input() animated: boolean;
@@ -18,26 +19,19 @@ export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
 	public amChart: T;
 	private drawing: boolean;
 
-	constructor(private zone: NgZone, private element: ElementRef) {}
-
-	ngOnDestroy() {
-		if (this.amChart) {
-			this.zone.runOutsideAngular(() => this.amChart.dispose());
-		}
-	}
+	constructor(
+		private zone: NgZone,
+		private element: ElementRef
+	) {}
 
 	ngOnChanges(changes: SimpleChanges) {
-		if (!this.options) {
-			return;
-		}
-
 		this.zone.runOutsideAngular(async () => {
 			while (this.drawing) {
 				await this.sleep(50);
 			}
 
 			this.drawing = true;
-			if (changes.options) {
+			if (changes.options && this.options) {
 				this.createChart();
 			}
 
@@ -55,6 +49,12 @@ export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
 		});
 	}
 
+	ngOnDestroy() {
+		if (this.amChart) {
+			this.zone.runOutsideAngular(() => this.amChart.dispose());
+		}
+	}
+
 	private createChart() {
 		if (this.amChart) {
 			this.amChart.dispose();
@@ -66,7 +66,9 @@ export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
 			unuseTheme(am4themes_animated);
 		}
 
-		this.amChart = createFromConfig(this.options, this.element.nativeElement, this.type) as T;
+		if (this.options) {
+			this.amChart = createFromConfig(this.options, this.element.nativeElement, this.type) as T;
+		}
 	}
 
 	private sleep(ms: number) {
