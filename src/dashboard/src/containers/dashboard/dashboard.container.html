@@ -1,70 +1,64 @@
 <!-- https://github.com/azouaoui-med/pro-sidebar-template -->
-<div class="page-wrapper border-radius-on"
-	[ngClass]="config.theme + '-theme'"
-	[class.visible]="isVisible"
-	[class.compressed]="isCompressed"
->
-	<nav id="sidebar" class="sidebar-wrapper">
-		<div class="sidebar-content">
-			<!-- sidebar-brand  -->
-			<div class="sidebar-item sidebar-brand">
-				<ng-content select="[id=brand]"></ng-content>
-			</div>
-
-			<!-- sidebar-header  -->
-			<div *ngIf="config.showHeader" class="sidebar-item sidebar-header d-flex flex-nowrap">
-				<div class="user-pic">
-					<img *ngIf="activeUser.picture" class="img-responsive img-rounded" [attr.src]="activeUser.picture" alt="User picture">
-					<mat-icon *ngIf="!activeUser.picture">person</mat-icon>
-				</div>
-				<div class="user-info">
-					<span class="user-name">
-						{{ activeUser.name }}
-					</span>
-					<span class="user-role">{{ role | titlecase }}</span>
-					<span *ngIf="status" class="user-status">
-						<mat-icon>radio_button_checked</mat-icon>
-						<span>{{ status }}</span>
-					</span>
-				</div>
-				<ng-content select=".sidebar-header-extra"></ng-content>
-			</div>
-
-			<!-- sidebar-search  -->
-			<div *ngIf="config.showSearch" class="sidebar-item sidebar-search">
-				<div class="input-group">
-					<input type="text"
-						class="form-control search-menu"
-						placeholder="{{ 'Search' | translate }}..."
-						(input)="onSearch($event.target.value)"
-					>
-					<div class="input-group-append">
-						<span class="input-group-text">
-							<mat-icon>search</mat-icon>
-						</span>
-					</div>
-				</div>
-			</div>
-
-			<!-- sidebar-menu -->
-			<vb-menu
-				class="sidebar-item sidebar-menu"
-				[config]="config"
-				[menu]="activeMenu">
-			</vb-menu>
-
-			<!-- sidebar-footer  -->
-			<!-- TODO
-			<vb-menu-footer *ngIf="footer" class="sidebar-footer">
-			</vb-menu-footer>
-			 -->
+<nav id="sidebar" class="sidebar-wrapper">
+	<div class="sidebar-content">
+		<!-- sidebar-brand  -->
+		<div class="sidebar-item sidebar-brand">
+			<ng-content select="[id=brand]"></ng-content>
 		</div>
-	</nav>
 
-	<main class="page-content">
-		<div id="overlay" class="overlay"></div>
-		<ng-content select="header"></ng-content>
-		<ng-content></ng-content>
-		<ng-content select="footer"></ng-content>
-	</main>
-</div>
+		<!-- sidebar-header  -->
+		<div *ngIf="config.showHeader" class="sidebar-item sidebar-header d-flex flex-nowrap">
+			<div class="user-pic">
+				<img *ngIf="activeUser.picture" class="img-responsive img-rounded" [attr.src]="activeUser.picture" alt="User picture">
+				<mat-icon *ngIf="!activeUser.picture">person</mat-icon>
+			</div>
+			<div class="user-info">
+				<span class="user-name">
+					{{ activeUser.name }}
+				</span>
+				<span class="user-role">{{ role | titlecase }}</span>
+				<span *ngIf="status" class="user-status">
+					<mat-icon>radio_button_checked</mat-icon>
+					<span>{{ status }}</span>
+				</span>
+			</div>
+			<ng-content select=".sidebar-header-extra"></ng-content>
+		</div>
+
+		<!-- sidebar-search  -->
+		<div *ngIf="config.showSearch" class="sidebar-item sidebar-search">
+			<div class="input-group">
+				<input type="text"
+					class="form-control search-menu"
+					placeholder="{{ 'Search' | translate }}..."
+					(input)="onSearch($event.target.value)"
+				>
+				<div class="input-group-append">
+					<span class="input-group-text">
+						<mat-icon>search</mat-icon>
+					</span>
+				</div>
+			</div>
+		</div>
+
+		<!-- sidebar-menu -->
+		<vb-menu
+			class="sidebar-item sidebar-menu"
+			[config]="config"
+			[menu]="activeMenu">
+		</vb-menu>
+
+		<!-- sidebar-footer  -->
+		<!-- TODO
+		<vb-menu-footer *ngIf="footer" class="sidebar-footer">
+		</vb-menu-footer>
+			-->
+	</div>
+</nav>
+
+<main class="page-content">
+	<div id="overlay" class="overlay"></div>
+	<ng-content select="header"></ng-content>
+	<ng-content></ng-content>
+	<ng-content select="footer"></ng-content>
+</main>

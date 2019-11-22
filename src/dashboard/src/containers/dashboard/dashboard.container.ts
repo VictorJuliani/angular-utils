@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter, OnChanges, SimpleChanges,
-	ChangeDetectionStrategy, ViewEncapsulation, OnInit, HostListener } from '@angular/core';
+	ChangeDetectionStrategy, ViewEncapsulation, OnInit, HostListener, HostBinding } from '@angular/core';
 import { User } from '@vonbraunlabs/app-state';
 import { Menu } from '../../models/menu.interface';
 import { DashboardConfig } from '../../models/config.interface';
@@ -21,16 +21,30 @@ export class DashboardContainer implements OnInit, OnChanges
 	@Input() isCompressed: boolean;
 	@Output() search = new EventEmitter<string>();
 
+	// css bindings
+	@HostBinding('class') get wrappers(): string {
+		const classes = 'page-wrapper border-radius-on';
+		if (this.config) {
+			return `${classes} ${this.config.theme}-theme`;
+		}
+
+		return classes;
+	}
+
+	@HostBinding('class.visible') get isVisible(): boolean {
+		return !this.isSmallScreen || !this.isCompressed;
+	}
+
+	@HostBinding('class.compressed') get compressed(): boolean {
+		return this.isCompressed;
+	}
+
 	// state properties
 	isSmallScreen: boolean;
 	activeMenu: Menu;
 
 	get activeUser(): User {
 		return this.user || { name: 'Unknown', roles: [] };
-	}
-
-	get isVisible(): boolean {
-		return !this.isSmallScreen || !this.isCompressed;
 	}
 
 	get role() {

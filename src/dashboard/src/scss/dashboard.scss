@@ -4,13 +4,12 @@
 
 /*----------------page-wrapper----------------*/
 .page-wrapper {
-    display: flex;
-    flex: 1;
+    display: block;
 
     .page-content {
         display: flex;
-        flex: 1;
         width: 100%;
+        height: 100%;
         transition: all .33s cubic-bezier(.685,.0473,.346,1);
         overflow-x: hidden;
 
@@ -60,7 +59,7 @@
             }
 
             .overlay {
-                @media screen and (max-width: 768px) {
+                @media screen and (max-width: 767px) {
                     display: block;
                 }
             }
