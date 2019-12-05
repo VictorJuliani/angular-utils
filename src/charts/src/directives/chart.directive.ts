@@ -8,7 +8,7 @@ import { ChartEntry } from '../models/entry.model';
 
 @Directive({ selector: '[vbChart]' })
 export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
-	@Input() vbChart: T;
+	@Input('vbChart') amChart: T;
 	@Input() type: new() => T;
 	@Input() options: object;
 	@Input() animated: boolean;
@@ -16,7 +16,7 @@ export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
 
 	@Output() chartUpdate = new EventEmitter<T>();
 
-	public amChart: T;
+	// public amChart: T;
 	private drawing: boolean;
 
 	constructor(
@@ -33,6 +33,8 @@ export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
 			this.drawing = true;
 			if (changes.options && this.options) {
 				this.createChart();
+			} else if (changes.vbChart && this.amChart) {
+				this.updateAnimations();
 			}
 
 			if (!this.amChart) {
@@ -60,14 +62,18 @@ export class ChartDirective<T extends Chart> implements OnChanges, OnDestroy {
 			this.amChart.dispose();
 		}
 
+		this.updateAnimations();
+
+		if (this.options) {
+			this.amChart = createFromConfig(this.options, this.element.nativeElement, this.type) as T;
+		}
+	}
+
+	private updateAnimations() {
 		if (this.animated) {
 			useTheme(am4themes_animated);
 		} else {
 			unuseTheme(am4themes_animated);
-		}
-
-		if (this.options) {
-			this.amChart = createFromConfig(this.options, this.element.nativeElement, this.type) as T;
 		}
 	}
 
